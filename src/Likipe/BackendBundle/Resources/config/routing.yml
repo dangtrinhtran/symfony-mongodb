@@ -1,0 +1,26 @@
+LikipeBackendBundle_index:
+    pattern:  /dashboard
+    defaults: { _controller: LikipeBackendBundle:Default:index }
+    
+LikipeBackendBundle_Post:
+    resource:   "@LikipeBackendBundle/Resources/config/routes/post.yml"
+    prefix:   /post
+    
+LikipeBackendBundle_Blog:
+    resource:   "@LikipeBackendBundle/Resources/config/routes/blog.yml"
+    prefix:   /blog
+    
+LikipeBackendBundle_User:
+    resource:   "@LikipeBackendBundle/Resources/config/routes/user.yml"
+    prefix:   /user
+ 
+LikipeBackendBundle_Security_login:
+    pattern:  /login
+    defaults: { _controller: "LikipeBackendBundle:Security:login" }
+
+LikipeBackendBundle_Security_login_check:
+    pattern:  /login_check
+
+LikipeBackendBundle_Security_logout:
+    pattern:  /logout
+    defaults: { _controller: "LikipeBackendBundle:Security:logout" }

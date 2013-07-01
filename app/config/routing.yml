@@ -1,5 +1,3 @@
-likipe_backend:
-    resource: "@LikipeBackendBundle/Controller/"
-    type:     annotation
-    prefix:   /
-
+Likipe_Backend:
+    resource: "@LikipeBackendBundle/Resources/config/routing.yml"
+    prefix:   /backend

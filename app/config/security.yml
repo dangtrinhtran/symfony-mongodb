@@ -1,39 +1,41 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        Likipe\BackendBundle\Document\User : sha512
 
     role_hierarchy:
-        ROLE_ADMIN:       ROLE_USER
-        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
+        ROLE_ADMIN:       ROLE_EDITOR
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        user:
+            mongodb:
+              class: LikipeBackendBundle:User
+              property:	username
 
     firewalls:
-        dev:
-            pattern:  ^/(_(profiler|wdt)|css|images|js)/
-            security: false
-
-        login:
-            pattern:  ^/demo/secured/login$
-            security: false
-
-        secured_area:
-            pattern:    ^/demo/secured/
+        backend:
+            pattern: ^/.*
+            provider: user
             form_login:
-                check_path: _security_check
-                login_path: _demo_login
+                check_path: /backend/login_check
+                login_path: /backend/login
+                default_target_path:	/backend/dashboard
             logout:
-                path:   _demo_logout
-                target: _demo
-            #anonymous: ~
-            #http_basic:
-            #    realm: "Secured Demo Area"
+                path:   /backend/logout
+                target: /
+                invalidate_session: false
+            anonymous:    true
+            remember_me:
+                key:      "%secret%"
+                lifetime: 3600
+                path:     /
+                domain:   ~
+                remember_me_parameter: _remember_me
 
     access_control:
-        - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
-        #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
+        - { path: ^/backend/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        #- { path: ^/backend/user/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/backend/post/add, roles: ROLE_EDITOR }
+        - { path: ^/backend/post/edit/*, roles: ROLE_EDITOR }
+        - { path: ^/backend/post, roles: ROLE_EDITOR }
+        - { path: ^/backend/dashboard, roles: ROLE_EDITOR }
+        - { path: ^/backend/*, roles: ROLE_ADMIN }

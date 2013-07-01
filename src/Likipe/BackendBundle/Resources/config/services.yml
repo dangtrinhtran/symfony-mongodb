@@ -1,0 +1,14 @@
+parameters:
+    likipe_backendbundle_services_log.class:      Likipe\BackendBundle\Services\LogService
+    likipe_backendbundle_listeners_slug:      Likipe\BackendBundle\Listeners\SlugListener
+
+services:
+    likipe.backend.log:
+        class: %likipe_backendbundle_services_log.class%
+        arguments: ["@service_container"]
+    likipe.backend.listener.slug:
+        class: %likipe_backendbundle_listeners_slug%
+        arguments: ["@service_container"]
+        tags:
+            - { name: doctrine_mongodb.odm.event_listener, event: prePersist }
+      

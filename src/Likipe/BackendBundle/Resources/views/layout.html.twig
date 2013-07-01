@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js gt-ie8" lang="{{app.request.locale}}"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+		<link rel="icon" type="image/x-icon" href="{{ asset('backend/images/favicon.ico') }}" />
+		
+        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
+		
+		{% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('backend/css/style.css?v=1.0') }}">
+		<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+		{% endblock %}
+
+        <script src="{{ asset('backend/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+		<div id="container">
+			{% block header %}
+				{% include 'LikipeBackendBundle:Default:header.html.twig'%}
+			{% endblock %}
+				
+			<div id="main" role="main">
+				{% block content %}{% endblock %}
+			</div>
+			
+			{% block footer %}
+				{% include 'LikipeBackendBundle:Default:footer.html.twig'%}
+			{% endblock %}
+		</div>
+        <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+        <script>window.jQuery || document.write('<script src="{{ asset('backend/js/vendor/jquery-1.9.1.min.js') }}"><\/script>')</script>
+
+        <script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script>
+		
+		{% block javascripts %}
+        <script src="{{ asset('backend/js/script.js') }}"></script>
+		<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script>
+		{% endblock %}
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

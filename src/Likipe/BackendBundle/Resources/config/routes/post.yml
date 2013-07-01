@@ -1,0 +1,15 @@
+LikipeBackendBundle_Post_add:
+    pattern:  /add
+    defaults: { _controller: "LikipeBackendBundle:Post:add" }
+
+LikipeBackendBundle_Post_index:
+    pattern:  /{iPage}
+    defaults: { _controller: "LikipeBackendBundle:Post:index", iPage: 1 }
+    
+LikipeBackendBundle_Post_edit:
+    pattern:  /edit/{iPostId}
+    defaults: { _controller: "LikipeBackendBundle:Post:edit" }
+    
+LikipeBackendBundle_Post_delete:
+    pattern:  /delete/{iPostId}
+    defaults: { _controller: "LikipeBackendBundle:Post:delete" }

@@ -1,0 +1,33 @@
+<header>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<a class="brand title" href="{{ path('LikipeBackendBundle_index') }}">Symfony training</a>
+				<div class="nav-collapse collapse">
+					{% block navigation %}
+					<ul class="nav">
+						<li class="active"><a href="{{ path('LikipeBackendBundle_index') }}">Home</a></li>
+						<li><a href="{{ path('LikipeBackendBundle_Post_index') }}">Post</a></li>
+						{% if is_granted('ROLE_ADMIN') %}
+							<li><a href="{{ path('LikipeBackendBundle_Blog_index') }}">Blog</a></li>
+							<li><a href="{{ path('LikipeBackendBundle_User_index') }}">User management</a></li>
+						{% endif %}
+					</ul>
+					{% endblock %}
+					<div class="logout pull-right">
+						{% if app.user.id is defined %}
+							<a href="#" class="lastname label-success pull-left btn btn-primary disabled">Hello <span>{{ app.user.lastname }}</a>
+							
+						{% endif %}
+						<a class="pull-right btn btn-primary" href="{{ path('LikipeBackendBundle_Security_logout') }}">Logout</a>
+					</div>
+				</div><!--/.nav-collapse -->
+			</div>
+		</div>
+	</div>
+</header>

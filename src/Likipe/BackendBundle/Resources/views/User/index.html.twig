@@ -1,0 +1,57 @@
+{% extends "LikipeBackendBundle::layout.html.twig" %}
+{% block title "User management" %}
+{% block content %}
+<div class="container">
+{% for flashMessage in app.session.flashbag.get('user_success') %}
+	<div class="alert alert-success">
+		<button title="Close" class="close" data-dismiss="alert" type="button">×</button>
+	{{ flashMessage }}
+	</div>
+{% endfor %}
+{% for flashMessage in app.session.flashbag.get('user_error') %}
+	<div class="alert alert-error">
+		<button title="Close" class="close" data-dismiss="alert" type="button">×</button>
+		{{ flashMessage }}
+	</div>
+{% endfor %}
+	<div class="row-fluid blog">		
+		<h2 style="padding-bottom: 20px;">List user!</h2>
+		<table class="list-posts table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>STT</th>
+					<th>User ID</th>
+					<th>Username</th>
+					<th>Email</th>
+					<th>ROLE</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if (oUsers is not empty) %}
+					{% for key, user in oUsers %}
+					<tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.15); padding-bottom: 15px;">
+
+						<td>{{ key + 1 }}</td>
+						<td>{{ user.id }}</td>
+						<td>{{ user.username }}</td>
+						<td>{{ user.email }}</td>
+						{% set roles = user.roles %}
+						{% if roles is not empty %}
+						<td>
+							{% for role in roles %}
+							{{ role }}
+							{% endfor %}
+						</td>
+						{% endif %}
+					</tr>
+					{% endfor %}
+				{% endif %}
+			</tbody>
+		</table>
+		
+		<div class="btn-submit-post" style="padding-top: 20px; padding-bottom: 50px;">	
+			<a class="btn btn-success" href="{{ path('LikipeBackendBundle_User_add') }}">{% trans %}Create user{% endtrans %}</a>
+		</div>
+	</div>
+</div> <!-- /container -->
+{% endblock %}

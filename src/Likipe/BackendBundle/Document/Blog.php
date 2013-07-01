@@ -4,6 +4,7 @@
 
 namespace Likipe\BackendBundle\Document;
 
+
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -42,9 +43,25 @@ class Blog {
 	 * @MongoDB\Boolean
 	 */
 	protected $delete;
+	
+	/** 
+	 * @MongoDB\PrePersist
+	 */
+	public function prePersist() {
+		$this->setCreated(new \DateTime('now'));
+		$this->setUpdated(new \DateTime('now'));
+		$this->setDelete(FALSE);
+	}
+
+	/** 
+	 * @MongoDB\PreUpdate
+	 */
+	public function preUpdate() {
+		$this->setUpdated(new \DateTime('now'));
+	}
 
 	/**
-	 * @MongoDB\EmbedMany(targetDocument="Likipe\BackendBundle\Document\Post")
+	 * @MongoDB\ReferenceMany(targetDocument="Likipe\BackendBundle\Document\Post", mappedBy="blog", cascade={"remove"})
 	 */
 	protected $posts = array();
 

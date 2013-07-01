@@ -1,0 +1,11 @@
+LikipeBackendBundle_User_index:
+    pattern:  /
+    defaults: { _controller: "LikipeBackendBundle:User:index" }
+    
+LikipeBackendBundle_User_add:
+    pattern:  /add
+    defaults: { _controller: "LikipeBackendBundle:User:add" }
+    
+LikipeBackendBundle_User_test:
+    pattern:  /test
+    defaults: { _controller: "LikipeBackendBundle:User:test" }

@@ -6,6 +6,7 @@ namespace Likipe\BackendBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -46,13 +47,14 @@ class User implements UserInterface {
 	private $password;
 
 	/**
-	 * @MongoDB\String
+	 * @MongoDB\Collection
 	 */
-	private $role;
+	private $roles = array();
 
 	/**
 	 * @MongoDB\String
 	 * @Assert\NotBlank()
+	 * @Assert\Email()
 	 */
 	private $email;
 
@@ -91,7 +93,7 @@ class User implements UserInterface {
 	 * @inheritDoc
 	 */
 	public function getRoles() {
-		return array('ROLE_USER');
+		return $this->roles;
 	}
 
 	/**
@@ -179,28 +181,15 @@ class User implements UserInterface {
 	 * @return self
 	 */
 	public function setPassword($password) {
+		$encoder = new MessageDigestPasswordEncoder();
+		/**
+		 * $password = $encoder->encodePassword($password, 'likipe');
+		 */
+		#If the user enters values ​​salt.
+		$password = $encoder->encodePassword($password, $this->getSalt());
 		$this->password = $password;
-		return $this;
-	}
 
-	/**
-	 * Set role
-	 *
-	 * @param string $role
-	 * @return self
-	 */
-	public function setRole($role) {
-		$this->role = $role;
 		return $this;
-	}
-
-	/**
-	 * Get role
-	 *
-	 * @return string $role
-	 */
-	public function getRole() {
-		return $this->role;
 	}
 
 	/**
@@ -241,6 +230,18 @@ class User implements UserInterface {
 	 */
 	public function getIsActive() {
 		return $this->isActive;
+	}
+
+
+    /**
+	 * Set roles
+	 *
+	 * @param collection $roles
+	 * @return self
+	 */
+	public function setRoles($roles) {
+		$this->roles = $roles;
+		return $this;
 	}
 
 }

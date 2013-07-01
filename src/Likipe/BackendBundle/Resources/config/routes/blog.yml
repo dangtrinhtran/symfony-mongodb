@@ -1,0 +1,15 @@
+LikipeBackendBundle_Blog_index:
+    pattern:  /
+    defaults: { _controller: "LikipeBackendBundle:Blog:index" }
+
+LikipeBackendBundle_Blog_add:
+    pattern:  /add
+    defaults: { _controller: "LikipeBackendBundle:Blog:add" }
+    
+LikipeBackendBundle_Blog_edit:
+    pattern:  /edit/{iBlogId}
+    defaults: { _controller: "LikipeBackendBundle:Blog:edit" }
+    
+LikipeBackendBundle_Blog_delete:
+    pattern:  /delete/{iBlogId}
+    defaults: { _controller: "LikipeBackendBundle:Blog:delete" }

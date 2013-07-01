@@ -74,3 +74,26 @@ doctrine_mongodb:
     hydrator_namespace:   Hydrators
     hydrator_dir:         %kernel.cache_dir%/doctrine/odm/mongodb/Hydrators
     auto_generate_hydrator_classes:  true
+
+trsteel_ckeditor:
+    class: Trsteel\CkeditorBundle\Form\Type\CkeditorType
+    transformers: ['strip_js', 'strip_css', 'strip_comments']
+    toolbar: ['document', 'clipboard', 'editing', 'elements', '/', 'basicstyles', 'paragraph', 'links', '/', 'insert', 'styles', 'tools']
+    toolbar_groups:
+        document: ['Source', '-','NewPage','Preview','Print','-','Templates']
+        clipboard: ['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']
+        editing: ['Find','Replace','-','SelectAll','-','SpellChecker']
+        elements: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'SelectionField', 'Button', 'ImageButton', 'HiddenField']
+        basicstyles: ['Bold','Italic','Underline','Strike','Subscript','Superscript','-','RemoveFormat']
+        paragraph: ['NumberedList','BulletedList','-','Outdent','Indent','-', 'Quote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter','JustifyRight','JustifyBlock']
+        links: ['Link','Unlink','Anchor']
+        insert: ['Image','Flash','Table','HorizontalRule', 'Smiley', 'Character', 'PageBreak', 'Iframe']
+        styles: ['Styles','Format', 'Font', 'FontSize', 'TextColor', 'BGColor']
+        tools: ['Maximize', 'ShowBlocks', 'About']
+    ui_color: '#cccccc'
+    startup_outline_blocks: true
+    width: 800 #Integer or %
+    height: 300 #Integer or %
+    language: 'en-au'
+    filebrowser_browse_url:
+        url: %path%
