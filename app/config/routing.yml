@@ -1,0 +1,5 @@
+likipe_backend:
+    resource: "@LikipeBackendBundle/Controller/"
+    type:     annotation
+    prefix:   /
+

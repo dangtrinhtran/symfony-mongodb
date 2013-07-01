@@ -1,0 +1,72 @@
+<?php
+// src/Likipe/BackendBundle/Document/Post.php
+namespace Likipe\BackendBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
+/**
+ * @MongoDB\EmbeddedDocument
+ */
+class Post {
+
+	/**
+	 * @MongoDB\Id(strategy="auto")
+	 */
+	protected $id;
+
+	/**
+     * @MongoDB\String
+     */
+	protected $author;
+
+	/**
+     * @MongoDB\String
+	 * @Assert\NotBlank()
+     */
+	protected $title;
+	
+	/**
+     * @MongoDB\String
+     */
+	protected $slug;
+
+	/**
+     * @MongoDB\String
+     */
+	protected $content;
+
+	/**
+	 * @MongoDB\Date
+	 */
+	protected $created;
+
+	/**
+	 * @MongoDB\Date
+	 */
+	protected $updated;
+
+	/**
+	 * @MongoDB\Boolean
+	 */
+	protected $delete;
+	
+	/**
+	 * @MongoDB\ReferenceOne(targetDocument="Likipe\BackendBundle\Document\Blog", inversedBy="posts")
+	 */
+	protected $blog;
+	
+	/**
+     * @MongoDB\String
+     */
+	protected $featuredimage;
+	
+	/**
+	 * @MongoDB\File
+	 * @Assert\File(maxSize="6000000")
+	 */
+	private $file;
+
+	
+}
