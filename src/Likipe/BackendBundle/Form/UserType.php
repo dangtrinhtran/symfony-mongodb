@@ -41,7 +41,7 @@ class UserType extends AbstractType {
 				),
 			'empty_value' => false,
 			'multiple'  => true,
-			'expanded'	=> true
+			'expanded'	=> false
 		));
 		
 		$builder->add('Email', 'email', array(

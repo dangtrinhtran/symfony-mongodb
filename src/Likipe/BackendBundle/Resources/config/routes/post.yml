@@ -13,3 +13,7 @@ LikipeBackendBundle_Post_edit:
 LikipeBackendBundle_Post_delete:
     pattern:  /delete/{iPostId}
     defaults: { _controller: "LikipeBackendBundle:Post:delete" }
+    
+LikipeBackendBundle_Comment_index:
+    resource:   "@LikipeBackendBundle/Resources/config/routes/comment.yml"
+    prefix:  /{iPostId}/comment

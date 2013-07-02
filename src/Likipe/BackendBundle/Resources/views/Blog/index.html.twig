@@ -29,9 +29,9 @@
 					<td>{{ blog.id }}</td>
 					<td>{{ blog.title }}</td>
 					{% set oDateCreate =  blog.created %}
-					<td>{{ oDateCreate.date }}</td>
+					<td>{{ formatDateTime(oDateCreate) }}</td>
 					{% set oDateUpdate =  blog.updated %}
-					<td>{{ oDateUpdate.date }}</td>
+					<td>{{ formatDateTime(oDateUpdate) }}</td>
 					<td>
 						<a class="btn btn-edit btn-info" href="{{ path('LikipeBackendBundle_Blog_edit', {'iBlogId': blog.id}) }}">{% trans %}Edit blog{% endtrans %}</a>
 						<br><br>

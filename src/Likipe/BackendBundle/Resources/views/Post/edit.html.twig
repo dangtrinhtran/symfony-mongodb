@@ -5,17 +5,17 @@
 
 	<div class="row-fluid blog">
 		<h1>Edit post!</h1>
-		<form class="form-post" action="" method="post" {{ form_enctype(post) }}>
+		<form class="form-post" action="" method="post" {{ form_enctype(form) }}>
 			<div class="content">
-			{{ form_errors(post) }}
+			{{ form_errors(form) }}
 			<div class="form-content clearfix row-fluid">
 				<div class="form-info">
-				{{ form_widget(post) }}
-				{% if oPost.featuredimage is defined %}
+				{{ form_widget(form) }}	
+				{% if oPost.featuredimage is not null %}
 						<img src="{{ asset(oPost.featuredimage) }}" class="img-polaroid">
 				{% endif %}
 				</div>
-				{{ form_rest(post) }}
+				{{ form_rest(form) }}
 				</div>
 					<div class="form-action" style="padding-top: 50px;">
 					<input class="btn btn-success" type="submit" value="{% trans %}Save{% endtrans %}" />

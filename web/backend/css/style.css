@@ -10,6 +10,7 @@
 	outline-style: none !important;
 }
 
+.message-comment,
 .description-blog {
 	height: 250px;
 }

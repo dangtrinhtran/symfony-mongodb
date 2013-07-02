@@ -52,7 +52,7 @@ class BlogController extends Controller {
 		}
 
 		return $this->render('LikipeBackendBundle:Blog:add.html.twig', array(
-					'blog' => $form->createView()
+					'form' => $form->createView()
 		));
 	}
 
@@ -82,8 +82,8 @@ class BlogController extends Controller {
 		}
 
 		return $this->render('LikipeBackendBundle:Blog:edit.html.twig', array(
-					'blog' => $form->createView(),
-					'$iBlogId' => $iBlogId
+					'form' => $form->createView(),
+					'iBlogId' => $iBlogId
 		));
 	}
 
@@ -97,11 +97,9 @@ class BlogController extends Controller {
 					'No blog found for id ' . $iBlogId
 			);
 		}
-		//When remove blog => delete all the posts in this blog.
 
 		$oBlog->setDelete(TRUE);
-		#$oPosts = $em->getRepository('LikipeBlogBundle:Post')->find($iBlogId);
-		#var_dump($oPosts);exit;
+		
 		$dm->flush();
 		$this->get('session')->getFlashBag()->add('blog_success', $this->get('translator')->trans('Delete successfully blog: ' . $oBlog->getTitle()));
 

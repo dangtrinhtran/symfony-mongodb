@@ -71,8 +71,9 @@ class PostType extends AbstractType {
 		 * Upload file
 		 */
 		
-		$builder->add('file', 'file', array(
+		$builder->add('featuredimage', 'file', array(
 			'label' => 'Featured image: ',
+			'data_class' => NULL,
 			'attr'	=> array('accept' => 'image/*'),//Specify that the server accepts only image files in the file upload.
 			'required'  => false
 		));

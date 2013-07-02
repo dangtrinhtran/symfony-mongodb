@@ -15,7 +15,7 @@ class UserController extends Controller {
 				->getRepository('LikipeBackendBundle:User')
 				->findAll();
 
-		if (!$oAllUsers) {
+		if (0 === count($oAllUsers)) {
 			$this->get('session')
 					->getFlashBag()
 					->add('user_does_not_exist', $this->get('translator')->trans('User does not exist!'));

@@ -14,8 +14,6 @@ class PostController extends Controller {
 				->getRepository('LikipeBackendBundle:Post')
 				->findAll();
 		
-		
-		
 		if (0 === count($aAllPosts)) {
 			$this->get('session')
 					->getFlashBag()
@@ -57,8 +55,10 @@ class PostController extends Controller {
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			//Upload file
-			$oPost->upload();
-
+			$uploadfile_service = $this->get("likipe.backend.uploadfile");
+			$featuredimage = $uploadfile_service->uploadFile($_FILES);
+			$oPost->setFeaturedimage($featuredimage);
+			
 			$dm = $this->get('doctrine_mongodb')->getManager();
 			/**
 			 * Persist: temporary variable to save, not save to database
@@ -67,6 +67,7 @@ class PostController extends Controller {
 			$dm->flush();
 
 			$log_service = $this->get("likipe.backend.log");
+			//$this->getUser();
 			$message = $securityContext->getToken()->getUser()->getUsername() . ': Create successfully post: ' . $oPost->getTitle();
 			$log_service->writeLog($message);
 
@@ -76,7 +77,7 @@ class PostController extends Controller {
 		}
 
 		return $this->render('LikipeBackendBundle:Post:add.html.twig', array(
-					'post' => $form->createView()
+					'form' => $form->createView()
 		));
 	}
 
@@ -98,10 +99,13 @@ class PostController extends Controller {
 		 */
 		$form->handleRequest($request);
 		if ($form->isValid()) {
-			$oFile = $form->get('file')->getData();
-
+			$oFile = $form->get('featuredimage')->getData();
+			
 			if (!empty($oFile)) {
-				$oPost->upload();
+				//Upload file
+				$uploadfile_service = $this->get("likipe.backend.uploadfile");
+				$featuredimage = $uploadfile_service->uploadFile($_FILES);
+				$oPost->setFeaturedimage($featuredimage);
 			}
 			$dm->flush();
 
@@ -115,7 +119,7 @@ class PostController extends Controller {
 		}
 
 		return $this->render('LikipeBackendBundle:Post:edit.html.twig', array(
-					'post' => $form->createView(),
+					'form' => $form->createView(),
 					'oPost' => $oPost,
 					'iPostId' => $iPostId
 		));
@@ -133,7 +137,11 @@ class PostController extends Controller {
 					'No post found for id ' . $iPostId
 			);
 		}
-
+		
+		//Remove file
+		$uploadfile_service = $this->get("likipe.backend.uploadfile");
+		$uploadfile_service->removeUploadFile($oPost->getFeaturedimage());
+		
 		$dm->remove($oPost);
 		$dm->flush();
 

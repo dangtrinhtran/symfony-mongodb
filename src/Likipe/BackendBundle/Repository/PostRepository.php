@@ -3,6 +3,7 @@
 namespace Likipe\BackendBundle\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
+use Likipe\BackendBundle\Document\Comment;
 
 /**
  * PostRepository
@@ -22,5 +23,32 @@ class PostRepository extends DocumentRepository {
 				->execute();
 		
 		return $oSql;
+	}
+	
+	public function getActiveComments($iPostId) {
+		
+		$oPost = $this->find($iPostId);
+		
+		$aComments = $oPost->getComments();
+		
+		foreach ($aComments as $oComment) {
+			if (FALSE === $oComment->getIsActive()) {
+				$aCommentsActive[$oComment->getId()] = $oComment;
+			}
+		}
+		return $aCommentsActive;
+	}
+	
+	public function getCommentById($iPostId, $iCommentId) {
+		
+		$oPost = $this->find($iPostId);
+		
+		$aComments = $oPost->getComments();
+		
+		foreach ($aComments as $oComment) {
+			if ($iCommentId == $oComment->getId()) {
+				return $oComment;
+			}
+		}
 	}
 }

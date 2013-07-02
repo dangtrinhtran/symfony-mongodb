@@ -8,7 +8,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @MongoDB\Document(repositoryClass="Likipe\BackendBundle\Repository\PostRepository")
+ * @MongoDB\Document(collection="Likipe_Post", repositoryClass="Likipe\BackendBundle\Repository\PostRepository")
  */
 class Post {
 
@@ -57,17 +57,16 @@ class Post {
 	 * @MongoDB\ReferenceOne(targetDocument="Likipe\BackendBundle\Document\Blog", inversedBy="posts")
 	 */
 	protected $blog;
+	
+	/**
+     * @MongoDB\EmbedMany(targetDocument="Likipe\BackendBundle\Document\Comment")
+     */
+	protected $comments = array();
 
 	/**
 	 * @MongoDB\String
 	 */
 	protected $featuredimage;
-
-	/**
-	 * @MongoDB\File
-	 * @Assert\File(maxSize="6000000")
-	 */
-	private $file;
 
 	/**
 	 * @MongoDB\PreUpdate
@@ -264,85 +263,4 @@ class Post {
 	public function getFeaturedimage() {
 		return $this->featuredimage;
 	}
-
-	/**
-	 * Set file
-	 *
-	 * @param file $file
-	 * @return self
-	 */
-	public function setFile($file) {
-		$this->file = $file;
-		return $this;
-	}
-
-	/**
-	 * Get file
-	 *
-	 * @return file $file
-	 */
-	public function getFile() {
-		return $this->file;
-	}
-
-	/**
-	 * The absolute directory path where uploaded.
-	 * Documents should be saved.
-	 * @author Rony <rony@likipe.se>
-	 * @return string
-	 */
-	protected function getUploadRootDir() {
-		return __DIR__ . '/../../../../web/' . $this->getUploadDir();
-	}
-
-	/**
-	 * Get directory path when upload.
-	 * @author Rony <rony@likipe.se>
-	 * @return string
-	 */
-	protected function getUploadRoot() {
-		return __DIR__ . '/../../../../web/';
-	}
-
-	/**
-	 * Get rid of the __DIR__ so it doesn't screw up
-	 * When displaying uploaded doc/image in the view.
-	 * @author Rony <rony@likipe.se>
-	 * @return string
-	 */
-	protected function getUploadDir() {
-		return 'uploads/documents';
-	}
-
-	/**
-	 * The upload() method will take advantage of the UploadedFile object, 
-	 * which is what's returned after a file field is submitted.
-	 * @author Rony <rony@likipe.se>
-	 */
-	public function upload() {
-		// the file property can be empty if the field is not required
-		if (null === $this->getFile()) {
-			return;
-		}
-
-		// use the original file name here but you should
-		// sanitize it at least to avoid any security issues
-		// move takes the target directory and then the
-		// target filename to move to
-
-
-		$fileName = pathinfo($this->getFile()->getClientOriginalName());
-		$fileUpload = time('now') . '.' . $fileName['extension'];
-
-		$this->getFile()->move(
-				$this->getUploadRootDir(), $fileUpload
-		);
-
-		// set the path property to the filename where you've saved the file
-		$this->featuredimage = $this->getUploadDir() . '/' . $fileUpload;
-
-		// clean up the file property as you won't need it anymore
-		$this->file = null;
-	}
-
 }

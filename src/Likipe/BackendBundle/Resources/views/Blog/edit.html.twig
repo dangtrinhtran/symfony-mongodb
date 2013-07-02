@@ -5,14 +5,14 @@
 
 	<div class="row-fluid blog">
 		<h1>Edit blog!</h1>
-		<form class="form-blog" action="" method="post" {{ form_enctype(blog) }}>
+		<form class="form-blog" action="" method="post" {{ form_enctype(form) }}>
 			<div class="content">
-			{{ form_errors(blog) }}
+			{{ form_errors(form) }}
 			<div class="form-content clearfix">
 				<div class="form-info row-fluid">
-				{{ form_widget(blog) }}
+				{{ form_widget(form) }}
 				</div>
-				{{ form_rest(blog) }}
+				{{ form_rest(form) }}
 				</div>
 					<div class="form-action" style="padding-top: 50px;">
 					<input class="btn btn-success" type="submit" value="{% trans %}Save{% endtrans %}" />

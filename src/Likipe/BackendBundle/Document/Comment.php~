@@ -1,0 +1,51 @@
+<?php
+
+// src/Likipe/BackendBundle/Document/Comment.php
+
+namespace Likipe\BackendBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * @MongoDB\EmbeddedDocument
+ */
+class Comment {
+
+	/**
+	 * @MongoDB\Id(strategy="auto")
+	 */
+	protected $id;
+
+	/**
+	 * @MongoDB\String
+	 */
+	protected $name;
+
+	/**
+	 * @MongoDB\String
+	 * @Assert\NotBlank()
+	 * @Assert\Email()
+	 */
+	protected $email;
+
+	/**
+	 * @MongoDB\String
+	 */
+	protected $content;
+
+	/**
+	 * @MongoDB\Date
+	 */
+	protected $created;
+
+	/**
+	 * @MongoDB\Boolean
+	 */
+	protected $isActive;
+
+	public function __construct() {
+		$this->isActive = FALSE;
+	}
+	
+}

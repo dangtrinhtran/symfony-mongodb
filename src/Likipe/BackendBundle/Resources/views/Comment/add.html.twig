@@ -1,11 +1,11 @@
 {% extends "LikipeBackendBundle::layout.html.twig" %}
-{% block title "Create post" %}
+{% block title "New comment" %}
 {% block content %}
 <div class="container">
 
 	<div class="row-fluid blog">
-		<h1>Create new post!</h1>
-		<form class="form-post" action="" method="post" {{ form_enctype(form) }}>
+		<h1>Create new comment!</h1>
+		<form class="form-blog" action="" method="post" {{ form_enctype(form) }}>
 			<div class="content">
 			{{ form_errors(form) }}
 			<div class="form-content clearfix row-fluid">

@@ -1,0 +1,11 @@
+LikipeBackendBundle_Comment_index:
+    pattern:  /
+    defaults: { _controller: "LikipeBackendBundle:Comment:index" }
+
+LikipeBackendBundle_Comment_add:
+    pattern:  /add
+    defaults: { _controller: "LikipeBackendBundle:Comment:add" }
+    
+LikipeBackendBundle_Comment_delete:
+    pattern:  /delete/{iCommentId}
+    defaults: { _controller: "LikipeBackendBundle:Comment:delete" }

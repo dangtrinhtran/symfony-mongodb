@@ -2,7 +2,7 @@
 
 namespace Likipe\BackendBundle\Extension;
 
-class FormatDateTimeExtension extends \Twig_Extension {
+class LikipeBackendExtension extends \Twig_Extension {
 
 	public function getFunctions() {
 		return array(
@@ -24,7 +24,7 @@ class FormatDateTimeExtension extends \Twig_Extension {
 	}
 
 	public function getName() {
-		return 'likipe_extension';
+		return 'LikipeBackendBundle_TwigExtension';
 	}
 
 }

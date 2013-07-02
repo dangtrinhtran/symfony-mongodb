@@ -8,9 +8,12 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder;
 use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Bundle\MongoDBBundle\Validator\Constraints\Unique as MongoDBUnique;
 
 /**
  * @MongoDB\Document(collection="Likipe_User", repositoryClass="Likipe\BackendBundle\Repository\UserRepository")
+ * @MongoDBUnique(fields="username", message="This username already exists, you can choose another username.")
+ * @MongoDBUnique(fields="email", message="This email already exists, you can choose another email.")
  */
 class User implements UserInterface {
 

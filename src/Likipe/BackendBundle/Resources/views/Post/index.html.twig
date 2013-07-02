@@ -8,6 +8,12 @@
 	{{ flashMessage }}
 	</div>
 {% endfor %}
+{% for flashMessage in app.session.flashbag.get('comment_success') %}
+	<div class="alert alert-success">
+		<button title="Close" class="close" data-dismiss="alert" type="button">×</button>
+	{{ flashMessage }}
+	</div>
+{% endfor %}		
 	<div class="row-fluid blog">		
 		<h2 style="padding-bottom: 20px;">List posts!</h2>
 		<table class="list-posts table table-striped table-bordered">
@@ -40,9 +46,9 @@
 					{% endif %}
 				</th>
 				{% set oDateCreate =  post.created %}
-				<td>{{ oDateCreate.date }}</td>
+				<td>{{ formatDateTime(oDateCreate) }}</td>
 				{% set oDateUpdate =  post.updated %}
-				<td>{{ oDateUpdate.date }}</td>
+				<td>{{ formatDateTime(oDateUpdate) }}</td>
 				<td>{{ post.author }}</td>
 				{% if post.blog is empty %}
 				<td></td>
@@ -55,6 +61,10 @@
 					{% if is_granted('ROLE_ADMIN') %}
 						<a class="btn btn-delete btn-danger" href="{{ path('LikipeBackendBundle_Post_delete', {'iPostId': post.id}) }}" onclick="return confirm('{% trans %}Are you sure you want to delete this post ?{% endtrans %}');">{% trans %}Delete post{% endtrans %}</a>
 					{% endif %}
+					<br><br>
+					<a class="btn-list-comment btn btn-primary" href="{{ path('LikipeBackendBundle_Comment_index', {'iPostId': post.id}) }}">{% trans %}List comments{% endtrans %}</a>
+					<br><br>
+					<a class="btn-add-comment btn btn-inverse" href="{{ path('LikipeBackendBundle_Comment_add', {'iPostId': post.id}) }}">{% trans %}Add comment{% endtrans %}</a>
 				</td>
 				</tr>
 			{% endfor %}

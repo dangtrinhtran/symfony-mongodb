@@ -40,5 +40,18 @@
 		</div>
 	</div>
 {% endfor %}
+		
+{% for flashMessage in app.session.flashbag.get('comment_does_not_exist') %}
+	<div class="alert alert-info">
+		<button title="Close" class="close" data-dismiss="alert" type="button">×</button>
+	{{ flashMessage }}
+	</div>
+
+	<div class="row-fluid blog">		
+		<div class="btn-submit-post" style="padding-top: 20px; padding-bottom: 50px;">	
+			<a class="btn btn-success" href="{{ path('LikipeBackendBundle_Post_index') }}">{% trans %}Back to post{% endtrans %}</a>
+		</div>
+	</div>
+{% endfor %}		
 </div> <!-- /container -->
 {% endblock %}

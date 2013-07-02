@@ -5,7 +5,7 @@ namespace Likipe\BackendBundle\Listeners;
 use Doctrine\ODM\MongoDB\Event\LifecycleEventArgs;
 use Likipe\BackendBundle\Document\Post;
 
-class SlugListener {
+class LikipeBackendListener {
 
 	public function prePersist(LifecycleEventArgs $eventArgs) {
 		$document = $eventArgs->getDocument();

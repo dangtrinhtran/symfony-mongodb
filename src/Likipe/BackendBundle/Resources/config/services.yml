@@ -1,14 +1,22 @@
 parameters:
     likipe_backendbundle_services_log.class:      Likipe\BackendBundle\Services\LogService
-    likipe_backendbundle_listeners_slug:      Likipe\BackendBundle\Listeners\SlugListener
+    likipe_backendbundle_services_uploadfile.class:      Likipe\BackendBundle\Services\UploadFileService
+    likipe_backendbundle_listeners:      Likipe\BackendBundle\Listeners\LikipeBackendListener
+    likipe_backendbundle_twigextension:      Likipe\BackendBundle\Extension\LikipeBackendExtension
 
 services:
     likipe.backend.log:
         class: %likipe_backendbundle_services_log.class%
         arguments: ["@service_container"]
-    likipe.backend.listener.slug:
-        class: %likipe_backendbundle_listeners_slug%
+    likipe.backend.uploadfile:
+        class: %likipe_backendbundle_services_uploadfile.class%
+        arguments: ["@service_container"]
+    likipe.backend.listener:
+        class: %likipe_backendbundle_listeners%
         arguments: ["@service_container"]
         tags:
             - { name: doctrine_mongodb.odm.event_listener, event: prePersist }
-      
+    likipe.backend.extension.twig:
+        class: %likipe_backendbundle_twigextension%
+        tags:
+            - { name: twig.extension }  

@@ -1,0 +1,46 @@
+{% extends "LikipeBackendBundle::layout.html.twig" %}
+{% block title "Comments" %}
+{% block content %}
+<div class="container">
+{% for flashMessage in app.session.flashbag.get('comment_success') %}
+	<div class="alert alert-success">
+		<button title="Close" class="close" data-dismiss="alert" type="button">×</button>
+	{{ flashMessage }}
+	</div>
+{% endfor %}
+	<div class="row-fluid blog">		
+		<h2 style="padding-bottom: 20px;">List comments!</h2>
+		<table class="list-posts table table-striped table-bordered">
+			<thead>
+				<tr>
+					<th>STT</th>
+					<th>Id comment</th>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Content</th>
+					<th>Created</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			
+				<tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.15); padding-bottom: 15px;">
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>
+						<a class="btn btn-delete btn-danger" href="{{ path('LikipeBackendBundle_Comment_delete', {'iPostId': iPostId, 'iCommentId': 1}) }}" onclick="return confirm('{% trans %}Are you sure you want to delete this comment ?{% endtrans %}');">{% trans %}Delete comment{% endtrans %}</a>
+					</td>
+				</tr>
+			
+			</tbody>
+		</table>
+	</div>
+</div> <!-- /container -->
+{% endblock %}
