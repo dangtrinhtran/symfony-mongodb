@@ -28,10 +28,10 @@
 			</thead>
 			<tbody>
 				{% if (oUsers is not empty) %}
-					{% for key, user in oUsers %}
+					{% for user in oUsers %}
 					<tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.15); padding-bottom: 15px;">
 
-						<td>{{ key + 1 }}</td>
+						<td>{{ loop.index }}</td>
 						<td>{{ user.id }}</td>
 						<td>{{ user.username }}</td>
 						<td>{{ user.email }}</td>

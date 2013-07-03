@@ -67,6 +67,11 @@ class Post {
 	 * @MongoDB\String
 	 */
 	protected $featuredimage;
+	
+	/**
+	 * @MongoDB\Boolean
+	 */
+	protected $isStatus;
 
 	/**
 	 * @MongoDB\PreUpdate
@@ -263,4 +268,37 @@ class Post {
 	public function getFeaturedimage() {
 		return $this->featuredimage;
 	}
+	
+    public function __construct() {
+		$this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->isActive = TRUE;
+	}
+
+	/**
+	 * Add comments
+	 *
+	 * @param Likipe\BackendBundle\Document\Comment $comments
+	 */
+	public function addComment(\Likipe\BackendBundle\Document\Comment $comments) {
+		$this->comments[] = $comments;
+	}
+
+	/**
+	 * Remove comments
+	 *
+	 * @param Likipe\BackendBundle\Document\Comment $comments
+	 */
+	public function removeComment(\Likipe\BackendBundle\Document\Comment $comments) {
+		$this->comments->removeElement($comments);
+	}
+
+	/**
+	 * Get comments
+	 *
+	 * @return Doctrine\Common\Collections\Collection $comments
+	 */
+	public function getComments() {
+		return $this->comments;
+	}
+
 }

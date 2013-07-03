@@ -1,6 +1,7 @@
 LikipeBackendBundle_Post_add:
-    pattern:  /add
-    defaults: { _controller: "LikipeBackendBundle:Post:add" }
+    pattern:  /add.{type}
+    defaults: { _controller: "LikipeBackendBundle:Post:add", type: html }
+    requirements: { type: "html" }
 
 LikipeBackendBundle_Post_index:
     pattern:  /{iPage}

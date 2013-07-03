@@ -67,6 +67,11 @@ class Post {
 	 * @MongoDB\String
 	 */
 	protected $featuredimage;
+	
+	/**
+	 * @MongoDB\Boolean
+	 */
+	protected $isStatus;
 
 	/**
 	 * @MongoDB\PreUpdate
@@ -266,6 +271,8 @@ class Post {
 	
     public function __construct() {
 		$this->comments = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->isStatus = TRUE;
+		$this->featuredimage = NULL;
 	}
 
 	/**
@@ -293,5 +300,25 @@ class Post {
 	 */
 	public function getComments() {
 		return $this->comments;
+	}
+
+    /**
+	 * Set isStatus
+	 *
+	 * @param boolean $isStatus
+	 * @return self
+	 */
+	public function setIsStatus($isStatus) {
+		$this->isStatus = $isStatus;
+		return $this;
+	}
+
+	/**
+	 * Get isStatus
+	 *
+	 * @return boolean $isStatus
+	 */
+	public function getIsStatus() {
+		return $this->isStatus;
 	}
 }

@@ -9,6 +9,10 @@ use Symfony\Component\HttpFoundation\Request;
 
 class BlogController extends Controller {
 
+	/**
+	 * indexAction
+	 * @author Rony <rony@likipe.se>
+	 */
 	public function indexAction() {
 
 		$aAllBlogs = $this->get('doctrine_mongodb')
@@ -31,6 +35,12 @@ class BlogController extends Controller {
 		);
 	}
 
+	/**
+	 * addAction
+	 * Create blog
+	 * @author Rony <rony@likipe.se>
+	 * @param type \Symfony\Component\HttpFoundation\Request $request
+	 */
 	public function addAction(Request $request) {
 
 		$oBlog = new Blog();
@@ -56,6 +66,12 @@ class BlogController extends Controller {
 		));
 	}
 
+	/**
+	 * editAction
+	 * Edit blog
+	 * @author Rony <rony@likipe.se>
+	 * @param type \Symfony\Component\HttpFoundation\Request $request, $iBlogId
+	 */
 	public function editAction(Request $request, $iBlogId) {
 
 		$dm = $this->get('doctrine_mongodb')->getManager();
@@ -87,6 +103,12 @@ class BlogController extends Controller {
 		));
 	}
 
+	/**
+	 * deleteAction
+	 * Delete blog
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iBlogId
+	 */
 	public function deleteAction($iBlogId) {
 
 		$dm = $this->get('doctrine_mongodb')->getManager();

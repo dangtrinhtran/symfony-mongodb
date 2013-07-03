@@ -38,4 +38,4 @@ security:
         - { path: ^/backend/post/edit/*, roles: ROLE_EDITOR }
         - { path: ^/backend/post, roles: ROLE_EDITOR }
         - { path: ^/backend/dashboard, roles: ROLE_EDITOR }
-        - { path: ^/backend/*, roles: ROLE_ADMIN }
+        - { path: ^/backend/*, roles: ROLE_ADMIN, requires_channel: https }

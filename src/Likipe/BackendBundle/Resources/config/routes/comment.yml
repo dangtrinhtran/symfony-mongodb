@@ -9,7 +9,11 @@ LikipeBackendBundle_Comment_add:
 LikipeBackendBundle_Comment_enable:
     pattern:  /enable/{iCommentId}
     defaults: { _controller: "LikipeBackendBundle:Comment:enable" }
-    
+
+LikipeBackendBundle_Comment_disable:
+    pattern:  /disable/{iCommentId}
+    defaults: { _controller: "LikipeBackendBundle:Comment:disable" }
+
 LikipeBackendBundle_Comment_delete:
     pattern:  /delete/{iCommentId}
     defaults: { _controller: "LikipeBackendBundle:Comment:delete" }

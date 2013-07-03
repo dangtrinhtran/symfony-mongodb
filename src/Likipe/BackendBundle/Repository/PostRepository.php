@@ -3,7 +3,6 @@
 namespace Likipe\BackendBundle\Repository;
 
 use Doctrine\ODM\MongoDB\DocumentRepository;
-use Likipe\BackendBundle\Document\Comment;
 
 /**
  * PostRepository
@@ -12,6 +11,13 @@ use Likipe\BackendBundle\Document\Comment;
  */
 class PostRepository extends DocumentRepository {
 	
+	/**
+	 * getActivePosts
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iLimit
+	 * @param type $iOffset
+	 * @return Object
+	 */
 	public function getActivePosts($iLimit = null, $iOffset = null) {
 
 		$oSql = $this->createQueryBuilder('Post')
@@ -25,35 +31,52 @@ class PostRepository extends DocumentRepository {
 		return $oSql;
 	}
 	
-	public function getActiveComments($iPostId) {
+	/**
+	 * getAllComments
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iPostId
+	 * @return array
+	 */
+	public function getAllComments($iPostId) {
 		
 		$oPost = $this->find($iPostId);
-		
+		if (empty($oPost))
+			return;
 		$aComments = $oPost->getComments();
 		
 		if (!empty($aComments)) {
 			$aCommentsActive = array();
 			foreach ($aComments as $oComment) {
 				if (!empty($oComment)) {
-					#if (FALSE === $oComment->getIsActive()) {
 					$aCommentsActive[$oComment->getId()] = $oComment;
-					#}
 				}
 			}
+			if (!empty($aCommentsActive))
+				arsort($aCommentsActive);
 			return $aCommentsActive;
-		}
+		} else 
+			return;
 	}
 	
+	/**
+	 * getCommentById
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iPostId, $iCommentId
+	 * @return Object
+	 */
 	public function getCommentById($iPostId, $iCommentId) {
-		
+
 		$oPost = $this->find($iPostId);
-		
+		if (empty($oPost))
+			return;
 		$aComments = $oPost->getComments();
-		
-		foreach ($aComments as $oComment) {
-			if ($iCommentId == $oComment->getId()) {
-				return $oComment;
+		if (!empty($aComments)) {
+			foreach ($aComments as $oComment) {
+				if ($iCommentId == $oComment->getId()) {
+					return $oComment;
+				}
 			}
-		}
+		} else 
+			return;
 	}
 }

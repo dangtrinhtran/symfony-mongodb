@@ -163,5 +163,4 @@ class Comment {
 	public function getIsActive() {
 		return $this->isActive;
 	}
-
 }

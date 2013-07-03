@@ -58,6 +58,18 @@ class PostType extends AbstractType {
 						->sort('title', 'DESC');
 			}
 		));
+		
+		$builder->add('isStatus', 'choice', array(
+			'choices' => array(
+				TRUE => 'Enable',
+				FALSE => 'Disable'
+			),
+			'multiple'	=>	false,
+			'empty_value' => false,
+			'attr'	=> array('class'	=> 'status-post'),
+			'expanded'	=>	'true',
+			'label'	=>	'Status:'
+		));
 
 		/**
 		 * Using CKEditor content

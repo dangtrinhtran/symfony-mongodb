@@ -24,6 +24,7 @@
 					<th>Title post</th>
 					<th>Slug post</th>
 					<th>Featured image</th>
+					<th>Status</th>
 					<th>Created post</th>
 					<th>Updated post</th>
 					<th>Author post</th>
@@ -44,6 +45,13 @@
 					{% if post.featuredimage is not empty %}
 					<img src="{{ asset(post.featuredimage) }}" class="img-polaroid">
 					{% endif %}
+				</th>
+				<th>
+					{% if post.isStatus == false %}
+						<span class="label label-post label-warning">Disable</span>
+					{% else %}
+						<span class="label label-post label-success">Enable</span>
+					{% endif %}	
 				</th>
 				{% set oDateCreate =  post.created %}
 				<td>{{ formatDateTime(oDateCreate) }}</td>

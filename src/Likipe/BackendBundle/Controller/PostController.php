@@ -9,6 +9,11 @@ use Symfony\Component\HttpFoundation\Request;
 
 class PostController extends Controller {
 
+	/**
+	 * indexAction
+	 * @author Rony <rony@likipe.se>
+	 * @param $iPage
+	 */
 	public function indexAction($iPage) {
 		$aAllPosts = $this->get('doctrine_mongodb')
 				->getRepository('LikipeBackendBundle:Post')
@@ -44,6 +49,12 @@ class PostController extends Controller {
 		);
 	}
 
+	/**
+	 * addAction
+	 * Create post
+	 * @author Rony <rony@likipe.se>
+	 * @param \Symfony\Component\HttpFoundation\Request $request
+	 */
 	public function addAction(Request $request) {
 		$oPost = new Post();
 		$securityContext = $this->container->get('security.context');
@@ -81,6 +92,12 @@ class PostController extends Controller {
 		));
 	}
 
+	/**
+	 * editAction
+	 * Edit post
+	 * @author Rony <rony@likipe.se>
+	 * @param \Symfony\Component\HttpFoundation\Request $request, $iPostId
+	 */
 	public function editAction(Request $request, $iPostId) {
 
 		$dm = $this->get('doctrine_mongodb')->getManager();
@@ -90,6 +107,7 @@ class PostController extends Controller {
 					'No post found for id ' . $iPostId
 			);
 		}
+		$featuredimageOld = $oPost->getFeaturedimage();
 		$securityContext = $this->container->get('security.context');
 		$form = $this->createForm(
 				new PostType($securityContext), $oPost
@@ -106,7 +124,9 @@ class PostController extends Controller {
 				$uploadfile_service = $this->get("likipe.backend.uploadfile");
 				$featuredimage = $uploadfile_service->uploadFile($_FILES);
 				$oPost->setFeaturedimage($featuredimage);
-			}
+			} else
+				$oPost->setFeaturedimage($featuredimageOld);
+			
 			$dm->flush();
 
 			$log_service = $this->get("likipe.backend.log");
@@ -125,6 +145,12 @@ class PostController extends Controller {
 		));
 	}
 
+	/**
+	 * deleteAction
+	 * Delete post
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iPostId
+	 */
 	public function deleteAction($iPostId) {
 
 		$securityContext = $this->container->get('security.context');

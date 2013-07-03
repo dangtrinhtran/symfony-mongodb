@@ -16,6 +16,7 @@ class LikipeBackendExtension extends \Twig_Extension {
 		}
 		
 		if ($value instanceof \DateTime) {
+			
 			$date = $value->getTimestamp();
 			$dateCurrent = $date + 7*3600;
 			$sDate = gmdate("l, d F Y h:i:s A", $dateCurrent);

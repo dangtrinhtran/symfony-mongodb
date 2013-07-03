@@ -9,11 +9,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CommentController extends Controller {
 	
+	/**
+	 * indexAction
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iPostId
+	 */
 	public function indexAction($iPostId) {
 		
 		$aAllComments = $this->get('doctrine_mongodb')
 				->getRepository('LikipeBackendBundle:Post')
-				->getActiveComments($iPostId);
+				->getAllComments($iPostId);
 		
 		if (0 === count($aAllComments)) {
 			$this->get('session')
@@ -32,6 +37,12 @@ class CommentController extends Controller {
 		);
 	}
 	
+	/**
+	 * addAction
+	 * Create comment
+	 * @author Rony <rony@likipe.se>
+	 * @param type \Symfony\Component\HttpFoundation\Request $request, $iPostId
+	 */
 	public function addAction(Request $request, $iPostId) {
 		
 		$oPost = $this->get('doctrine_mongodb')
@@ -56,7 +67,7 @@ class CommentController extends Controller {
 			
 			$oPost->addComment($oComment);
 			
-			$dm->persist($oComment);
+			#$dm->persist($oComment);
 			$dm->flush();
 			$this->get('session')->getFlashBag()->add('comment_success', $this->get('translator')->trans('Add successfully comment for ' . $oPost->getTitle() . ' : ' . $oComment->getName()));
 
@@ -68,6 +79,12 @@ class CommentController extends Controller {
 		));
 	}
 	
+	/**
+	 * deleteAction
+	 * Delete comment
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iPostId, $iCommentId
+	 */
 	public function deleteAction($iPostId, $iCommentId) {
 
 		$dm = $this->get('doctrine_mongodb')->getManager();
@@ -80,7 +97,7 @@ class CommentController extends Controller {
 		}
 		
 		$oComment = $dm->getRepository('LikipeBackendBundle:Post')->getCommentById($iPostId, $iCommentId);
-
+		
 		$oPost->removeComment($oComment);
 		
 		$dm->flush();
@@ -89,6 +106,12 @@ class CommentController extends Controller {
 		return $this->redirect($this->generateUrl('LikipeBackendBundle_Comment_index', array('iPostId'	=> $iPostId)));
 	}
 	
+	/**
+	 * enableAction
+	 * Enable comment
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iPostId, $iCommentId
+	 */
 	public function enableAction($iPostId, $iCommentId) {
 
 		$dm = $this->get('doctrine_mongodb')->getManager();
@@ -101,11 +124,42 @@ class CommentController extends Controller {
 		}
 		
 		$oComment = $dm->getRepository('LikipeBackendBundle:Post')->getCommentById($iPostId, $iCommentId);
-
-		$oComment->setIsActive(TRUE);
+		
+		if (FALSE === $oComment->getIsActive()) {
+			$oComment->setIsActive(TRUE);
+		}
 		
 		$dm->flush();
 		$this->get('session')->getFlashBag()->add('comment_success', $this->get('translator')->trans('Enable successfully comment: ' . $oComment->getName()));
+
+		return $this->redirect($this->generateUrl('LikipeBackendBundle_Comment_index', array('iPostId'	=> $iPostId)));
+	}
+	
+	/**
+	 * disableAction
+	 * Disable comment
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iPostId, $iCommentId
+	 */
+	public function disableAction($iPostId, $iCommentId) {
+
+		$dm = $this->get('doctrine_mongodb')->getManager();
+		$oPost = $dm->getRepository('LikipeBackendBundle:Post')->find($iPostId);
+
+		if (!$oPost) {
+			throw $this->createNotFoundException(
+					'No found post by id ' . $iPostId
+			);
+		}
+		
+		$oComment = $dm->getRepository('LikipeBackendBundle:Post')->getCommentById($iPostId, $iCommentId);
+		
+		if (TRUE === $oComment->getIsActive()) {
+			$oComment->setIsActive(FALSE);
+		}
+		
+		$dm->flush();
+		$this->get('session')->getFlashBag()->add('comment_success', $this->get('translator')->trans('Disable successfully comment: ' . $oComment->getName()));
 
 		return $this->redirect($this->generateUrl('LikipeBackendBundle_Comment_index', array('iPostId'	=> $iPostId)));
 	}

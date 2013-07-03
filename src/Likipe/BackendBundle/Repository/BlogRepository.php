@@ -11,6 +11,13 @@ use Doctrine\ODM\MongoDB\DocumentRepository;
  */
 class BlogRepository extends DocumentRepository {
 	
+	/**
+	 * getActiveBlogs
+	 * @author Rony <rony@likipe.se>
+	 * @param type $iLimit
+	 * @param type $iOffset
+	 * @return Object
+	 */
 	public function getActiveBlogs($iLimit = null, $iOffset = null) {
 
 		$oSql = $this->createQueryBuilder('Blog')

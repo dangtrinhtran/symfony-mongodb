@@ -15,6 +15,19 @@
 	height: 250px;
 }
 
+.list-posts thead tr th {
+	text-transform: uppercase;
+	text-align: center;
+}
+
+footer .container p {
+	padding-top: 20px;
+	border-top: 1px solid #ddd;
+}
+
+.status-post > label {
+	display: inline-block;
+}
 
 .form-user ul {
 	list-style: none;
@@ -24,6 +37,7 @@
 	color: #ee0000;
 }
 
+.btn-delete,
 .btn-edit {
 	margin-left: auto !important;
 	margin-right: auto !important;
@@ -32,6 +46,7 @@
 	text-align:center;
 }
 
+.label-post,
 .label-comment {
 	height: 26px;
 	text-align: center;
@@ -39,6 +54,9 @@
 	line-height: 26px;
 	padding-left: 10px;
 	padding-right: 10px;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	float: none !important;
 }
 
 .login-header {
