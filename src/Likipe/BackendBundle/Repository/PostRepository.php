@@ -31,12 +31,17 @@ class PostRepository extends DocumentRepository {
 		
 		$aComments = $oPost->getComments();
 		
-		foreach ($aComments as $oComment) {
-			if (FALSE === $oComment->getIsActive()) {
-				$aCommentsActive[$oComment->getId()] = $oComment;
+		if (!empty($aComments)) {
+			$aCommentsActive = array();
+			foreach ($aComments as $oComment) {
+				if (!empty($oComment)) {
+					#if (FALSE === $oComment->getIsActive()) {
+					$aCommentsActive[$oComment->getId()] = $oComment;
+					#}
+				}
 			}
+			return $aCommentsActive;
 		}
-		return $aCommentsActive;
 	}
 	
 	public function getCommentById($iPostId, $iCommentId) {

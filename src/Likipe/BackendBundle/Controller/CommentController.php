@@ -14,7 +14,7 @@ class CommentController extends Controller {
 		$aAllComments = $this->get('doctrine_mongodb')
 				->getRepository('LikipeBackendBundle:Post')
 				->getActiveComments($iPostId);
-
+		
 		if (0 === count($aAllComments)) {
 			$this->get('session')
 					->getFlashBag()
@@ -86,6 +86,27 @@ class CommentController extends Controller {
 		$dm->flush();
 		$this->get('session')->getFlashBag()->add('comment_success', $this->get('translator')->trans('Delete successfully comment: ' . $oComment->getName()));
 
-		return $this->redirect($this->generateUrl('LikipeBackendBundle_Comment_index'));
+		return $this->redirect($this->generateUrl('LikipeBackendBundle_Comment_index', array('iPostId'	=> $iPostId)));
+	}
+	
+	public function enableAction($iPostId, $iCommentId) {
+
+		$dm = $this->get('doctrine_mongodb')->getManager();
+		$oPost = $dm->getRepository('LikipeBackendBundle:Post')->find($iPostId);
+
+		if (!$oPost) {
+			throw $this->createNotFoundException(
+					'No found post by id ' . $iPostId
+			);
+		}
+		
+		$oComment = $dm->getRepository('LikipeBackendBundle:Post')->getCommentById($iPostId, $iCommentId);
+
+		$oComment->setIsActive(TRUE);
+		
+		$dm->flush();
+		$this->get('session')->getFlashBag()->add('comment_success', $this->get('translator')->trans('Enable successfully comment: ' . $oComment->getName()));
+
+		return $this->redirect($this->generateUrl('LikipeBackendBundle_Comment_index', array('iPostId'	=> $iPostId)));
 	}
 }
