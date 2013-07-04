@@ -10,19 +10,24 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 		<link rel="icon" type="image/x-icon" href="{{ asset('backend/images/favicon.ico') }}" />
-		
-        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
         <style>
             body {
                 padding-top: 60px;
                 padding-bottom: 40px;
             }
         </style>
-        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
 		
 		{% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('backend/css/style.css?v=1.0') }}">
-		<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+			{% stylesheets 
+				'backend/css/bootstrap.min.css'
+				'backend/css/bootstrap-responsive.min.css'
+				'backend/css/style.css'
+				'backend/css/uniform.default.min.css'
+				debug=false
+				output='backend/css/compiled/*'
+			%}
+				<link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
+			{% endstylesheets %}
 		{% endblock %}	
 
         <script src="{{ asset('backend/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
@@ -49,11 +54,17 @@
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
         <script>window.jQuery || document.write('<script src="{{ asset('backend/js/vendor/jquery-1.9.1.min.js') }}"><\/script>')</script>
 
-        <script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script>
 		
 		{% block javascripts %}
-        <script src="{{ asset('backend/js/script.js') }}"></script>
-		<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script>
+			{% javascripts 
+				'backend/js/libs/jquery.uniform.min.js'
+				'backend/js/vendor/bootstrap.min.js'
+				'backend/js/script.js'
+				debug=false	
+				output='backend/js/compiled/*' 
+			%}
+			<script src="{{ asset_url }}"></script>
+			{% endjavascripts %}
 		{% endblock %}
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

@@ -1,0 +1,17 @@
+assetic:
+  assets:
+    backend_js:
+      inputs:
+        - '%kernel.root_dir%/../web/backend/js/script.js'
+        - '%kernel.root_dir%/../web/backend/js/vendor/bootstrap.min.js'
+        - '%kernel.root_dir%/../web/backend/js/libs/jquery.uniform.min.js'
+      output:
+        - '%kernel.root_dir%/../web/backend/js/compiled/script.js'
+    backend_css:
+      inputs:
+        - '%kernel.root_dir%/../web/backend/css/style.css'
+        - '%kernel.root_dir%/../web/backend/css/bootstrap.min.css'
+        - '%kernel.root_dir%/../web/backend/css/bootstrap-responsive.min.css'
+        - '%kernel.root_dir%/../web/backend/css/uniform.default.min.css'
+      output:
+        - '%kernel.root_dir%/../web/backend/css/compiled/style.css'
