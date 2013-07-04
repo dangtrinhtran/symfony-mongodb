@@ -1,9 +1,0 @@
-assetic:
-  assets:
-    backend_js:
-      filters:
-        - uglifyjs2
-    backend_css:
-      filters:
-        - cssmin
-        - cssrewrite

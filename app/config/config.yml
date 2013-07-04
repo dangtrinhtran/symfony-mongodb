@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    #- { resource: assets.yml }
+    - { resource: assets.yml }
 
 framework:
     #esi:             ~
@@ -30,7 +30,8 @@ twig:
 assetic:
     debug:          %kernel.debug%
     use_controller: false
-    bundles:        [LikipeBackendBundle]
+    write_to:       %kernel.root_dir%/../web/backend/compiled/
+    #bundles:        [LikipeBackendBundle]
     #java: /usr/bin/java
     filters:
         cssrewrite: ~
