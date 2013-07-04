@@ -13,7 +13,11 @@ LikipeBackendBundle_Blog:
 LikipeBackendBundle_User:
     resource:   "@LikipeBackendBundle/Resources/config/routes/user.yml"
     prefix:   /user
- 
+    
+LikipeBackendBundle_Security_accessdenied:
+    pattern:  /denied
+    defaults: { _controller: "LikipeBackendBundle:Security:denied" }
+    
 LikipeBackendBundle_Security_login:
     pattern:  /login
     defaults: { _controller: "LikipeBackendBundle:Security:login" }
@@ -24,3 +28,4 @@ LikipeBackendBundle_Security_login_check:
 LikipeBackendBundle_Security_logout:
     pattern:  /logout
     defaults: { _controller: "LikipeBackendBundle:Security:logout" }
+

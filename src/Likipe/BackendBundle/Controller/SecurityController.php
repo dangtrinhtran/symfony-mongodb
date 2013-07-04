@@ -33,5 +33,10 @@ class SecurityController extends Controller {
 	public function logoutAction() {
 		throw new \RuntimeException('You must activate the logout in your security firewall configuration.');
 	}
+	
+	
+	public function deniedAction() {
+		return $this->render('LikipeBackendBundle:Default:denied.html.twig');
+	}
 
 }

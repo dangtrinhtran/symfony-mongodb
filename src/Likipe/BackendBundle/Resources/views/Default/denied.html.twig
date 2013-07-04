@@ -12,18 +12,13 @@
 		<link rel="icon" type="image/x-icon" href="{{ asset('backend/images/favicon.ico') }}" />
 		
         <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
+        
         <link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
 		
 		{% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('backend/css/style.css?v=1.0') }}">
 		<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
-		{% endblock %}	
+		{% endblock %}
 
         <script src="{{ asset('backend/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
     </head>
@@ -34,17 +29,34 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 		<div id="container">
-			{% block header %}
-				{% include 'LikipeBackendBundle:Default:header.html.twig'%}
-			{% endblock %}
 				
 			<div id="main" role="main">
-				{% block content %}{% endblock %}
+				<div class="container-fluid">
+					<div class="row-fluid">
+						<div class="row-fluid">
+							<div class="span12 center login-header">
+								<h2>Symfony training with MongoDB</h2>
+							</div><!--/span-->
+						</div><!--/row-->
+						
+						<div class="row-fluid">
+							<div class="well span5 center login-box">
+								<div class="alert alert-block">
+									<button type="button" class="close" data-dismiss="alert">&times;</button>
+									<h4>Warning!</h4>
+								</div>
+								<div class="header"><span><i class="icon-warning-sign"></i></span><span><header>{% trans %}Access Denied{% endtrans %}</header></span></div>
+					        	<div class="content error">				        		 
+						            {% trans %}You are not authorize to access to this page! Please try to login to another account {% endtrans %}
+						            <br/><br/>
+					            	<input class="btn btn-info" type="button" onclick="location.href='{{ path('LikipeBackendBundle_Security_login') }}'" value="{% trans %}Cancel{% endtrans %}" />
+					            </div>
+							</div><!--/span-->
+						</div><!--/row-->
+					</div><!--/fluid-row-->
+
+				</div><!--/.fluid-container-->
 			</div>
-			
-			{% block footer %}
-				{% include 'LikipeBackendBundle:Default:footer.html.twig'%}
-			{% endblock %}
 		</div>
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
         <script>window.jQuery || document.write('<script src="{{ asset('backend/js/vendor/jquery-1.9.1.min.js') }}"><\/script>')</script>
@@ -53,7 +65,13 @@
 		
 		{% block javascripts %}
         <script src="{{ asset('backend/js/script.js') }}"></script>
+		<!-- checkbox, radio, and file input styler -->
 		<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$('#remember_me').uniform();
+			});
+		</script>
 		{% endblock %}
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

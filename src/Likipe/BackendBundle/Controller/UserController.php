@@ -29,10 +29,6 @@ class UserController extends Controller {
 		);
 	}
 
-	public function deniedAction() {
-		return $this->render('LikipeBackendBundle:Default:denied.html.twig');
-	}
-
 	public function addAction(Request $request) {
 
 		$oUser = new User();
