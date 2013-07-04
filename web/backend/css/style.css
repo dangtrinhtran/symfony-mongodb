@@ -37,6 +37,7 @@ footer .container p {
 	color: #ee0000;
 }
 
+.btn-enable,
 .btn-delete,
 .btn-edit {
 	margin-left: auto !important;
