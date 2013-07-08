@@ -5,11 +5,16 @@ parameters:
             server: mongodb://localhost:27017
             options:
                 connect: true
-                
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    
+    mailer_transport:  smtp
+    mailer_encryption: ssl
+    mailer_auth_mode: login
+    mailer_host:       smtp.gmail.com
+    mailer_sender_email:    KIMDANH8XX@gmail.com
+    mailer_user: KIMDANH8XX
+    mailer_password: trandangtrinh
+    mailer_standard_name:       KIMDANH8XX@gmail.com			
+
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
 

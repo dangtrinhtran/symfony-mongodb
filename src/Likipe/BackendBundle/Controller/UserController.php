@@ -44,7 +44,26 @@ class UserController extends Controller {
 			$dm = $this->get('doctrine_mongodb')->getManager();
 			$dm->persist($oUser);
 			$dm->flush();
-			$this->get('session')->getFlashBag()->add('user_success', $this->get('translator')->trans('Create successfully user: ' . $oUser->getUsername()));
+			//Send mail
+			$message = \Swift_Message::newInstance()
+					->setSubject('Hi ' . $oUser->getLastname())
+					->setFrom($this->container->getParameter('mailer_standard_name'))
+					->setTo($oUser->getEmail())
+					->setBody(
+						'<html>' .
+							' <head></head>' .
+							' <body>' .
+								'Hi ' . $oUser->getLastname() . 
+								'<br>' .
+								'Your username: ' . $oUser->getUsername() .
+							' </body>' .
+						'</html>',
+						  'text/html' // Mark the content-type as HTML
+						)
+					;
+			$this->get('mailer')->send($message);
+			
+			$this->get('session')->getFlashBag()->add('user_success', $this->get('translator')->trans('Create successfully user: ' . $oUser->getUsername() . '. Your username and password have been sent in your email!'));
 
 			return $this->redirect($this->generateUrl('LikipeBackendBundle_User_index'));
 		}

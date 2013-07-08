@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Warning!{% endblock %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 		<link rel="icon" type="image/x-icon" href="{{ asset('backend/images/favicon.ico') }}" />
@@ -47,7 +47,7 @@
 								</div>
 								<div class="header"><span><i class="icon-warning-sign"></i></span><span><header>{% trans %}Access Denied{% endtrans %}</header></span></div>
 					        	<div class="content error">				        		 
-						            {% trans %}You are not authorize to access to this page! Please try to login to another account {% endtrans %}
+						            {% trans %}You are not authorize to access to this page! Please try to login to another account.{% endtrans %}
 						            <br/><br/>
 					            	<input class="btn btn-info" type="button" onclick="location.href='{{ path('LikipeBackendBundle_Security_login') }}'" value="{% trans %}Cancel{% endtrans %}" />
 					            </div>
