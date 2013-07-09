@@ -5,9 +5,13 @@ assetic:
         - '%kernel.root_dir%/../web/backend/js/script.js'
         - '%kernel.root_dir%/../web/backend/js/vendor/bootstrap.min.js'
         - '%kernel.root_dir%/../web/backend/js/libs/jquery.uniform.min.js'
+      output:
+        - '%kernel.root_dir%/../web/backend/js/common.js'
     backend_css:
       inputs:
         - '%kernel.root_dir%/../web/backend/css/bootstrap.min.css'
         - '%kernel.root_dir%/../web/backend/css/bootstrap-responsive.min.css'
         - '%kernel.root_dir%/../web/backend/css/uniform.default.min.css'
         - '%kernel.root_dir%/../web/backend/css/style.css'
+      output:
+        - '%kernel.root_dir%/../web/backend/css/common.css'

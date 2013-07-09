@@ -271,7 +271,8 @@ class Post {
 	
     public function __construct() {
 		$this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->isActive = TRUE;
+		$this->isStatus = TRUE;
+		$this->featuredimage = NULL;
 	}
 
 	/**
@@ -301,4 +302,23 @@ class Post {
 		return $this->comments;
 	}
 
+    /**
+	 * Set isStatus
+	 *
+	 * @param boolean $isStatus
+	 * @return self
+	 */
+	public function setIsStatus($isStatus) {
+		$this->isStatus = $isStatus;
+		return $this;
+	}
+
+	/**
+	 * Get isStatus
+	 *
+	 * @return boolean $isStatus
+	 */
+	public function getIsStatus() {
+		return $this->isStatus;
+	}
 }

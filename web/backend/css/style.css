@@ -20,6 +20,14 @@
 	text-align: center;
 }
 
+.login-success {
+	line-height: 26px;
+}
+
+.logout-success {
+	margin-top: 0 !important;
+}
+
 footer .container p {
 	padding-top: 20px;
 	border-top: 1px solid #ddd;
@@ -119,7 +127,7 @@ div.center,p.center,img.center{
 }
 .login-box .btn{
 	margin-top:15px;
-	width:100%
+/*	width:100%*/
 }
 .charisma_qr{
 	height:136px;

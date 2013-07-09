@@ -18,9 +18,22 @@
         </style>
 		
 		{% block stylesheets %}
-			{% stylesheets '@backend_css' debug=false %}
-				<link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
-			{% endstylesheets %}
+			{% if (app.environment == 'dev') %}
+				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/style.css?v=2.1') }}">
+			{% else %}
+				{% stylesheets
+					'backend/css/bootstrap.min.css'
+					'backend/css/bootstrap-responsive.min.css'
+					'backend/css/uniform.default.min.css'
+					'backend/css/style.css'
+					debug=false
+					output='backend/css/compiled/style.css' %}
+					<link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
+				{% endstylesheets %}
+			{% endif %}
 		{% endblock %}
 
         <script src="{{ asset('backend/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
@@ -46,12 +59,22 @@
 		</div>
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
         <script>window.jQuery || document.write('<script src="{{ asset('backend/js/vendor/jquery-1.9.1.min.js') }}"><\/script>')</script>
-
 		
 		{% block javascripts %}
-			{% javascripts '@backend_js' debug=false %}
-			<script type="text/javascript" src="{{ asset_url }}"></script>
-			{% endjavascripts %}
+			{% if (app.environment == 'dev') %}
+				<script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script> 
+				<script src="{{ asset('backend/js/script.js?v=2.1') }}"></script>
+				<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script> 
+			{% else %}
+				{% javascripts
+					'backend/js/libs/jquery.uniform.min.js'
+					'backend/js/vendor/bootstrap.min.js'
+					'backend/js/script.js'
+					debug=false
+					output='backend/js/compiled/script.js' %}
+				<script type="text/javascript" src="{{ asset_url }}"></script>
+				{% endjavascripts %}
+			{% endif %}
 		{% endblock %}
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

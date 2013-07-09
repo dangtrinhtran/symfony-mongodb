@@ -163,14 +163,4 @@ class Comment {
 	public function getIsActive() {
 		return $this->isActive;
 	}
-	
-	public function getCommentById( $comment_id ){
-		foreach( $this->comments as $comment ){
-			if ( $comment->getId() == $comment_id ){
-				return $comment;
-			}
-		}
-		return null;
-	}
-
 }

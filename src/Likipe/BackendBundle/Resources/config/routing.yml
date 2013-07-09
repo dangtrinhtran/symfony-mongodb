@@ -1,6 +1,6 @@
 LikipeBackendBundle_index:
     pattern:  /dashboard
-    defaults: { _controller: LikipeBackendBundle:Default:index }
+    defaults: { _controller: LikipeBackendBundle:Default:index }  
     
 LikipeBackendBundle_Post:
     resource:   "@LikipeBackendBundle/Resources/config/routes/post.yml"
@@ -28,4 +28,3 @@ LikipeBackendBundle_Security_login_check:
 LikipeBackendBundle_Security_logout:
     pattern:  /logout
     defaults: { _controller: "LikipeBackendBundle:Security:logout" }
-

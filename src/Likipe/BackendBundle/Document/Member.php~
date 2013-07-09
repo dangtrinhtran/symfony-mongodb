@@ -1,0 +1,49 @@
+<?php
+
+// src/Likipe/BackendBundle/Document/Member.php
+
+namespace Likipe\BackendBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use FOS\UserBundle\Model\User as BaseUser;
+
+/**
+ * @MongoDB\Document(collection="Likipe_Member", repositoryClass="Likipe\BackendBundle\Repository\MemberRepository")
+ */
+class Member extends BaseUser {
+
+	/**
+	 * @MongoDB\Id(strategy="auto")
+	 */
+	protected $id;
+
+	/**
+	 * @MongoDB\String
+	 */
+	protected $firstname;
+
+	/**
+	 * @MongoDB\String
+	 */
+	protected $lastname;	
+
+	/**
+	 * @MongoDB\Boolean
+	 */
+	protected $isActive;
+
+	public function __construct() {
+		parent::__construct();
+		$this->isActive = true;
+	}
+
+	/**
+	 * Get name
+	 *
+	 * @return string $name
+	 */
+	public function getName() {
+		return $this->firstname . ' ' . $this->lastname;
+	}
+
+}

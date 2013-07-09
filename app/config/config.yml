@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: assets.yml }
+    #- { resource: assets.yml }
 
 framework:
     #esi:             ~
@@ -67,6 +67,12 @@ swiftmailer:
     host:       %mailer_host%
     username:   %mailer_user%
     password:   %mailer_password%
+
+#Configure the FOSUserBundle
+fos_user:
+    db_driver: mongodb
+    firewall_name: main
+    user_class: Likipe\BackendBundle\Document\Member
 
 # Doctrine MongoDB Configuration
 doctrine_mongodb:

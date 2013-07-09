@@ -10,4 +10,11 @@ class DefaultController extends Controller {
 		return $this->render('LikipeBackendBundle:Default:index.html.twig');
 	}
 
+	public function homeAction() {
+		return $this->render('LikipeBackendBundle:Default:home.html.twig');
+	}
+	
+	public function frontendAction() {
+		return $this->render('LikipeBackendBundle:Default:frontend.html.twig');
+	}
 }

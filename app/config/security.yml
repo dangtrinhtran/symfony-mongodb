@@ -1,17 +1,36 @@
 security:
     encoders:
         Likipe\BackendBundle\Document\User : sha512
+        FOS\UserBundle\Model\UserInterface: sha512
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_EDITOR
+        ROLE_EDITOR:			ROLE_MEMBER
 
     providers:
         user:
             mongodb:
               class: LikipeBackendBundle:User
               property:	username
+        fos_userbundle:
+            mongodb:
+              class: LikipeBackendBundle:Member
+              property:	email
 
     firewalls:
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                check_path: /login_check
+                login_path: /login
+                default_target_path:	/frontend
+            logout:
+                path:   /logout
+                target: /
+                invalidate_session: false
+            anonymous:    true
         backend:
             pattern: ^/.*
             access_denied_url: /backend/denied
@@ -31,8 +50,11 @@ security:
                 path:     /
                 domain:   ~
                 remember_me_parameter: _remember_me
-
+            
     access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/backend/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         #- { path: ^/backend/user/*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/backend/post/add, roles: ROLE_EDITOR }
