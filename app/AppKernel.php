@@ -20,6 +20,7 @@ class AppKernel extends Kernel
 			new Trsteel\CkeditorBundle\TrsteelCkeditorBundle(),
             new Likipe\BackendBundle\LikipeBackendBundle(),
 			new FOS\UserBundle\FOSUserBundle(),
+            new Likipe\FrontendBundle\LikipeFrontendBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -72,7 +72,7 @@ swiftmailer:
 fos_user:
     db_driver: mongodb
     firewall_name: main
-    user_class: Likipe\BackendBundle\Document\Member
+    user_class: Likipe\FrontendBundle\Document\Member
 
 # Doctrine MongoDB Configuration
 doctrine_mongodb:

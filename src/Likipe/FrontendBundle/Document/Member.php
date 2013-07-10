@@ -1,14 +1,14 @@
 <?php
 
-// src/Likipe/BackendBundle/Document/Member.php
+// src/Likipe/FrontendBundle/Document/Member.php
 
-namespace Likipe\BackendBundle\Document;
+namespace Likipe\FrontendBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 use FOS\UserBundle\Model\User as BaseUser;
 
 /**
- * @MongoDB\Document(collection="Likipe_Member", repositoryClass="Likipe\BackendBundle\Repository\MemberRepository")
+ * @MongoDB\Document(collection="Likipe_Member", repositoryClass="Likipe\FrontendBundle\Repository\MemberRepository")
  */
 class Member extends BaseUser {
 

@@ -1,6 +1,6 @@
 _welcome:
     pattern:	/
-    defaults: { _controller: LikipeBackendBundle:Default:home }
+    defaults: { _controller: LikipeFrontendBundle:Default:default }
 
 _main:
     resource: routing.yml

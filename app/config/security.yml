@@ -14,25 +14,12 @@ security:
               property:	username
         fos_userbundle:
             mongodb:
-              class: LikipeBackendBundle:Member
+              class: LikipeFrontendBundle:Member
               property:	email
 
     firewalls:
-        main:
-            pattern: ^/
-            form_login:
-                provider: fos_userbundle
-                csrf_provider: form.csrf_provider
-                check_path: /login_check
-                login_path: /login
-                default_target_path:	/frontend
-            logout:
-                path:   /logout
-                target: /
-                invalidate_session: false
-            anonymous:    true
         backend:
-            pattern: ^/.*
+            pattern: ^/backend/.*
             access_denied_url: /backend/denied
             provider: user
             form_login:
@@ -50,6 +37,19 @@ security:
                 path:     /
                 domain:   ~
                 remember_me_parameter: _remember_me
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_provider: form.csrf_provider
+                check_path: /login_check
+                login_path: /login
+                default_target_path:	/index
+            logout:
+                path:   /logout
+                target: /
+                invalidate_session: false
+            anonymous:    true
             
     access_control:
         - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
@@ -61,4 +61,5 @@ security:
         - { path: ^/backend/post/edit/*, roles: ROLE_EDITOR }
         - { path: ^/backend/post, roles: ROLE_EDITOR }
         - { path: ^/backend/dashboard, roles: ROLE_EDITOR }
+        #- { path: ^/frontend/*, roles: ROLE_MEMBER }
         - { path: ^/backend/*, roles: ROLE_ADMIN, requires_channel: https }
