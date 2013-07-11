@@ -1,0 +1,32 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block title %}{% trans %}Begäran e{% endtrans %}{% endblock %}
+
+{% block fos_user_content %}
+<h3 class="title-login">{% trans %}Begäran e{% endtrans %}</h3>
+<div class="space-top login-form">
+    <div class="row-fluid">
+        <div class="span5 login offset3">
+			<form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request space-top">
+			    <div class="row-fluid log-name">
+			    	<div class="span9 offset2">
+				        {% if invalid_username is defined %}
+				            <p>{{ 'resetting.request.invalid_username'|trans({'%username%': invalid_username}) }}</p>
+				        {% endif %}
+				        <span class="help-inline">{% trans %}Användarnamn eller epost-adress{% endtrans %}</span>
+				        <div class="space-top">
+				        	<input type="text" id="username" name="username" required="required" />
+				        </div>
+				    </div>
+			    </div>
+			    <div class="row-fluid">
+			        <input type="submit" value="{{ 'resetting.request.submit'|trans }}" class=" btn btn-info pull-right"/>
+			    </div>
+			    <div class="break-bottom"></div>
+			</form>
+		</div>
+    </div>
+</div>
+{% endblock fos_user_content %}

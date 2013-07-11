@@ -1,7 +1,9 @@
 parameters:
-#    likipe_frontend.example.class: Likipe\FrontendBundle\Example
+    likipe_frontend_registration_form.type: Likipe\FrontendBundle\Form\MemberRegistrationType
 
 services:
-#    likipe_frontend.example:
-#        class: %likipe_frontend.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    likipe_member_registration_form_type:
+         class: %likipe_frontend_registration_form.type%
+         arguments: [%fos_user.model.user.class%]
+         tags:
+             - { name: form.type, alias: likipe_frontend_registration }

@@ -1,0 +1,55 @@
+<form action="{{ path('fos_user_profile_edit') }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit ajax-form">
+    <div class="row-fluid flash-error">
+        {{ form_errors(form) }}
+    </div>
+    <div class="alert hide">
+        <strong>{% trans %}Oops!{% endtrans %}</strong>
+        <ul class="errors">
+        </ul>
+    </div>
+    <div class="row-fluid">
+        <div class="div-input">
+            {{ form_widget(form.firstname) }}
+        </div>
+        <div class="div-input">
+            {{ form_widget(form.lastname) }}
+        </div>
+        <div class="div-input">
+            {{ form_widget(form.email) }}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="div-input">
+            <div class="row-fluid">
+                <div class="pull-left login-bir">
+                    <label class="pull-left">{{ 'personal.birthDate'|trans({}, 'editprofile') }}</label>
+                    <div class="dropdownlist-day pull-left">
+                        {{ form_widget(form.communityUser.birthdate.day, { 'attr': {'class': 'typeahead selectbox'} }) }}
+                    </div>
+
+                    <div class="dropdownlist-month pull-left">
+                        {{ form_widget(form.communityUser.birthdate.month, { 'attr': {'class': 'typeahead selectbox'} }) }}
+                    </div>
+
+                    <div class="dropdownlist-year pull-left">
+                        {{ form_widget(form.communityUser.birthdate.year, { 'attr': {'class': 'typeahead selectbox'} }) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="div-input checkbox-reg">
+            {% for child in form.communityUser.gender %}
+           <div class="register-gender">
+              {{ form_label(child) }}  {{ form_widget(child) }}
+           </div>
+        {% endfor %}
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="div-input">
+            <input type="password" id="password" name="_password" required="required" placeholder="{{ 'placeholder_password'|trans({}, 'editprofile') }}"/>
+        </div>
+    </div>
+    {#{{ form_rest(form) }}#}
+    <button class="btn btn-primary btn-info pull-right" type="submit">{{ 'save'|trans({}, 'editprofile') }}</button>
+</form>

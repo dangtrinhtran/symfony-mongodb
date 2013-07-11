@@ -1,0 +1,28 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% block subject %}
+	{% autoescape false %}
+	{{ 'welcome.email.subject'|trans({'%username%': user.username}) }}
+	{% endautoescape %}
+{% endblock %}
+
+{% block body_text %}
+	{% autoescape false %}
+	Grattis!
+	\n\n
+	Ditt konto har skapats!
+	\n\n
+	MVH
+	Teamet
+	{% endautoescape %}
+{% endblock %}
+{% block content_welcome %}
+	Grattis!
+	</br></br>
+	Ditt konto har skapats!
+	</br></br>
+	MVH
+	Teamet
+{% endblock %}
+{% block body_html %}
+	{% include 'ApplicationFrontendBundle:Email:emailTemplate.html.twig' with {'recipient': user.username, 'content': block('content_welcome')} %}
+{% endblock %}

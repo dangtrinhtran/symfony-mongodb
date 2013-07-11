@@ -1,0 +1,13 @@
+<h1>Register</h1>
+
+<form id="userRegistration" class="registration-form form-horizontal custom-form fos_user_registration_register" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" novalidate>
+    <div class="row-fluid input-register">
+        {{ form_errors(form) }}
+    </div>
+    {{ form_widget(form) }}
+		
+    <div class="row-fluid">
+        <button class=" btn btn-success" type="submit" id="_submit" name="_submit" class="btn btn-warning"/>{{ 'Submit'|trans({}, 'FOSUserBundle') }}</button>
+    </div>
+{{ form_widget(form._token) }}
+</form>
