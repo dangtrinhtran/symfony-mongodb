@@ -35,6 +35,7 @@ class Member extends BaseUser {
 	public function __construct() {
 		parent::__construct();
 		$this->isActive = true;
+		$this->roles[] = 'ROLE_MEMBER';
 	}
 
 	/**
