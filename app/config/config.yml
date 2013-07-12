@@ -73,7 +73,10 @@ fos_user:
     db_driver: mongodb
     firewall_name: main
     user_class: Likipe\FrontendBundle\Document\Member
-
+    registration:
+        form:
+            type: likipe_member_registration
+    
 # Doctrine MongoDB Configuration
 doctrine_mongodb:
     connections: %mongodb_connections%

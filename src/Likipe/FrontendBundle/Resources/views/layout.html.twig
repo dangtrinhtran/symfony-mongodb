@@ -11,13 +11,23 @@
         <meta name="viewport" content="width=device-width">
 		<link rel="icon" type="image/x-icon" href="{{ asset('backend/images/favicon.ico') }}" />
 		
-        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
-        
-        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
-		
-		{% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('backend/css/style.css?v=1.0') }}">
-		<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+        {% block stylesheets %}
+			{% if (app.environment == 'dev') %}
+				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/style.css?v=2.1') }}">
+			{% else %}
+				{% stylesheets
+					'backend/css/bootstrap.min.css'
+					'backend/css/bootstrap-responsive.min.css'
+					'backend/css/uniform.default.min.css'
+					'backend/css/style.css'
+					debug=false
+					output='backend/css/compiled-style.css' %}
+					<link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
+				{% endstylesheets %}
+			{% endif %}
 		{% endblock %}
 
         <script src="{{ asset('backend/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
@@ -35,23 +45,14 @@
 					<div class="row-fluid">
 						<div class="row-fluid">
 							<div class="span12 center login-header">
-								<h2>Symfony training with MongoDB</h2>
+								<h2 class="h2-frontend">Symfony training with MongoDB</h2>
+								<h3 class="frontend">Frontend</h3>
 							</div><!--/span-->
 						</div><!--/row-->
-						
-						<div class="row-fluid">
-							<div class="well span5 center login-box">
-								{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-									<div class="content error">
-										{{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}<br/>  <br/>
-										<input class="btn btn-warning" type="button" onclick="location.href='{{ path('fos_user_security_logout') }}'" value="{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}" />
-									</div>
-								{% else %}
-									{% block fos_user_content %}
-									{% endblock fos_user_content %}
-								{% endif %}
-							</div><!--/span-->
-						</div><!--/row-->
+						{% block fos_user_content %}
+						{% endblock fos_user_content %}
+						{% block content %}
+						{% endblock content %}
 					</div><!--/fluid-row-->
 
 				</div><!--/.fluid-container-->
@@ -60,18 +61,28 @@
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
         <script>window.jQuery || document.write('<script src="{{ asset('backend/js/vendor/jquery-1.9.1.min.js') }}"><\/script>')</script>
 
-        <script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script>
-		
-		{% block javascripts %}
-        <script src="{{ asset('backend/js/script.js') }}"></script>
-		<!-- checkbox, radio, and file input styler -->
-		<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script>
-		<script type="text/javascript">
+        {% block javascripts %}
+			{% if (app.environment == 'dev') %}
+				<script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script> 
+				<script src="{{ asset('backend/js/script.js?v=2.1') }}"></script>
+				<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script> 
+			{% else %}
+				{% javascripts
+					'backend/js/libs/jquery.uniform.min.js'
+					'backend/js/vendor/bootstrap.min.js'
+					'backend/js/script.js'
+					debug=false
+					output='backend/js/compiled-script.js' %}
+				<script type="text/javascript" src="{{ asset_url }}"></script>
+				{% endjavascripts %}
+			{% endif %}
+			<script type="text/javascript">
 			jQuery(document).ready(function($) {
 				$('#remember_me').uniform();
 			});
-		</script>
+			</script>	
 		{% endblock %}
+		
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];

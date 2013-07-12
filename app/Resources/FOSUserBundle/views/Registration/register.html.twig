@@ -1,13 +1,62 @@
-<h1>Register</h1>
-
-<form id="userRegistration" class="registration-form form-horizontal custom-form fos_user_registration_register" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" novalidate>
-    <div class="row-fluid input-register">
-        {{ form_errors(form) }}
-    </div>
-    {{ form_widget(form) }}
-		
-    <div class="row-fluid">
-        <button class=" btn btn-success" type="submit" id="_submit" name="_submit" class="btn btn-warning"/>{{ 'Submit'|trans({}, 'FOSUserBundle') }}</button>
-    </div>
-{{ form_widget(form._token) }}
-</form>
+{% extends "LikipeFrontendBundle::layout.html.twig" %}
+{% block content %}
+{% if (app.user.username is not defined) %}
+	<div class="row-fluid">
+		<div class="well span5 center login-box">
+			<div class="alert alert-info">
+				Please complete the information below!
+			</div>
+			<form id="userRegistration" class="registration-form form-horizontal custom-form fos_user_registration_register" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
+				<h3>Register member with FOSUserBundle</h3>
+				<fieldset>
+					<div class="center span5 input-register">
+						{{ form_errors(form) }}
+					</div>
+					<div class="center span5 input-register">
+						{{ form_widget(form.firstname) }}
+						{{ form_widget(form.lastname) }}
+					</div>
+					<div class="center span5 input-register">
+						{{ form_widget(form.gender) }}
+					</div>
+					<div class="center span5 input-register">
+						{{ form_widget(form.username, { 'attr': {'placeholder': 'Username', 'required': 'required'} }) }}
+						{{ form_errors(form.username) }}
+					</div>	
+					<div class="center span5 input-register">
+						{{ form_widget(form.email, { 'attr': {'placeholder': 'Email', 'required': 'required'} }) }}
+						{{ form_errors(form.email) }}
+					</div>
+					<div class="center span5 input-register">
+						{{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Password', 'required': 'required'} }) }}
+						{{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Repeat Password', 'required': 'required'} }) }}
+						{{ form_errors(form.plainPassword) }}
+					</div>
+					<div class="center span5">
+						<p class="row-fluid">
+							<button type="submit" id="_submit" name="_submit" class="btn btn-primary span8">{{ 'Register'|trans({}, 'FOSUserBundle') }}</button>
+							<a class="btn btn-success span4" href="{{ path('_welcome') }}">Cancel</a>
+						</p>
+					</div>
+					{{ form_widget(form._token) }}
+				</fieldset>
+			</form>
+		</div><!--/span-->
+	</div><!--/row-->
+{% else %}
+	<div class="row-fluid">
+		<div class="well span5 center login-box">
+			<div class="alert alert-info">
+				<h4>HOME PAGE!</h4>
+				<p>Symfony2.3</p>
+				<div class="center span8">
+					<p class="row-fluid">
+						<span class="login-success label label-success span8">{{ app.user.username }} Login Success</span>
+						<a class="btn logout-success btn-danger span4" href="{{ path('fos_user_security_logout') }}">Logout</a>
+					</p>
+				</div>
+			</div>
+		</div><!--/span-->
+	</div><!--/row-->
+{% endif %}
+{% endblock content %}

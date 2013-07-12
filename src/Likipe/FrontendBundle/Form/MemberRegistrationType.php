@@ -15,8 +15,7 @@ class MemberRegistrationType extends BaseType {
 					'required' => true,
 					'translation_domain' => 'FOSUserBundle',
 					'attr' => array(
-						'placeholder' => 'Firstname',
-						'class' => 'pull-left',
+						'placeholder' => 'Firstname'
 					),
 				))
 				->add('lastname', 'text', array(
@@ -24,34 +23,18 @@ class MemberRegistrationType extends BaseType {
 					'required' => true,
 					'translation_domain' => 'FOSUserBundle',
 					'attr' => array(
-						'placeholder' => 'Lastname',
-						'class' => 'pull-left',
+						'placeholder' => 'Lastname'
 					),
 				))
-				->add('email', 'repeated', array(
-					'type' => 'email',
-					'options' => array('translation_domain' => 'FOSUserBundle'),
-					'first_options' => array('label' => 'Email',
-						'attr' => array(
-							'placeholder' => 'Email',
-						)),
-					'second_options' => array('label' => 'Email confirm',
-						'attr' => array(
-							'placeholder' => 'Email confirm',
-						))
-				))
-				->add('plainPassword', 'repeated', array(
-					'type' => 'password',
-					'options' => array('translation_domain' => 'FOSUserBundle'),
-					'first_options' => array('label' => 'Password',
-						'attr' => array(
-							'placeholder' => 'Password',
-						)),
-					'second_options' => array('label' => 'Password confirm',
-						'attr' => array(
-							'placeholder' => 'Password confirm',
-						))
-		));
+				->add('gender', 'choice', array(
+					'choices' => array(
+						'Male' => 'Male',
+						'Female' => 'Female'
+					),
+					'empty_value' => false,
+				));
+		
+		parent::buildForm($builder, $options);
 	}
 
 	public function setDefaultOptions(OptionsResolverInterface $resolver) {

@@ -2,8 +2,8 @@ parameters:
     likipe_frontend_registration_form.type: Likipe\FrontendBundle\Form\MemberRegistrationType
 
 services:
-    likipe_member_registration_form_type:
+    likipe.member.registration.form.type:
          class: %likipe_frontend_registration_form.type%
          arguments: [%fos_user.model.user.class%]
          tags:
-             - { name: form.type, alias: likipe_frontend_registration }
+             - { name: form.type, alias: likipe_member_registration }

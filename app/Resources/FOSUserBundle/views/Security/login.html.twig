@@ -1,25 +1,62 @@
 {% extends "LikipeFrontendBundle::layout.html.twig" %}
-
 {% trans_default_domain 'FOSUserBundle' %}
-
 {% block fos_user_content %}
-{% if error %}
-    <div>{{ error|trans }}</div>
+{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+	<div class="row-fluid">
+		<div class="well span5 center login-box">
+			<div class="alert alert-info">
+				<h4>HOME PAGE!</h4>
+				<p>Symfony2.3</p>
+				<div class="center span8">
+					<p class="row-fluid">
+						<span class="login-success label label-success span8">{{ app.user.username }} Login Success</span>
+						<a class="btn logout-success btn-danger span4" href="{{ path('fos_user_security_logout') }}">Logout</a>
+					</p>
+				</div>
+			</div>
+		</div><!--/span-->
+	</div><!--/row-->
+{% else %}
+	{% if error %}
+		<div class="row-fluid">
+			<div class="login-error span5 center alert alert-error">
+				<button title="Close" class="close" data-dismiss="alert" type="button">×</button>
+				{{ error|trans }}
+			</div>
+		</div>
+	{% endif %}
+	<div class="row-fluid">
+		<div class="well span5 center login-box">
+			<div class="alert alert-info">
+				Please login with your Email and Password.
+			</div>
+			<form  class="form-horizontal" action="{{ path("fos_user_security_check") }}" method="post">
+				<fieldset>
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+					<div class="input-prepend" title="Email" data-rel="tooltip">
+						<span class="add-on"><i class="icon-user"></i></span><input autofocus class="input-large span10" name="_username" id="username" type="text" placeholder="Email" value="{{ last_username }}" />
+					</div>
+					<div class="clearfix"></div>
+
+					<div class="input-prepend" title="Password" data-rel="tooltip">
+						<span class="add-on"><i class="icon-lock"></i></span><input class="input-large span10" name="_password" id="password" type="password" placeholder="Password" />
+					</div>
+					<div class="clearfix"></div>
+
+					<div class="input-prepend">
+						<label class="remember" for="remember_me"><input type="checkbox" id="remember_me" name="_remember_me" value="on" />Remember me</label>
+					</div>
+					<div class="clearfix"></div>
+
+					<div class="center span5">
+						<p class="row-fluid">
+							<button type="submit" id="_submit" name="_submit" class="btn btn-primary span8">Login</button>
+							<a class="btn btn-success span4" href="{{ path('_welcome') }}">Cancel</a>
+						</p>
+					</div>
+				</fieldset>
+			</form>
+		</div><!--/span-->
+	</div><!--/row-->
 {% endif %}
-
-<form action="{{ path("fos_user_security_check") }}" method="post">
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-    <label for="username">{{ 'security.login.username'|trans }}</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-
-    <label for="password">{{ 'security.login.password'|trans }}</label>
-    <input type="password" id="password" name="_password" required="required" />
-
-    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-
-    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-</form>
-	jdsfjkhdsgjkfds
 {% endblock fos_user_content %}

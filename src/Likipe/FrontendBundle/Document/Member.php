@@ -32,10 +32,27 @@ class Member extends BaseUser {
 	 */
 	protected $isActive;
 
+	/**
+	 * @MongoDB\Date
+	 */
+	protected $created;
+
+	/**
+	 * @MongoDB\String
+	 */
+	protected $gender;
+
 	public function __construct() {
 		parent::__construct();
 		$this->isActive = true;
 		$this->roles[] = 'ROLE_MEMBER';
+	}
+	
+	/**
+	 * @MongoDB\prePersist
+	 */
+	public function prePersist() {
+		$this->setCreated(new \DateTime('now'));
 	}
 
 	/**
@@ -114,6 +131,46 @@ class Member extends BaseUser {
 	 */
 	public function getIsActive() {
 		return $this->isActive;
+	}
+
+	/**
+	 * Set created
+	 *
+	 * @param date $created
+	 * @return self
+	 */
+	public function setCreated($created) {
+		$this->created = $created;
+		return $this;
+	}
+
+	/**
+	 * Get created
+	 *
+	 * @return date $created
+	 */
+	public function getCreated() {
+		return $this->created;
+	}
+
+	/**
+	 * Set gender
+	 *
+	 * @param string $gender
+	 * @return self
+	 */
+	public function setGender($gender) {
+		$this->gender = $gender;
+		return $this;
+	}
+
+	/**
+	 * Get gender
+	 *
+	 * @return string $gender
+	 */
+	public function getGender() {
+		return $this->gender;
 	}
 
 }

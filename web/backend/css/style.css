@@ -16,6 +16,21 @@ body {
 	font-family: 'philosopherregular';
 }
 
+.h2-frontend {
+	margin: 0;
+}
+
+.frontend {
+	margin: 0;
+	text-transform: uppercase;
+}
+
+.input-register > select,
+.input-register > input {
+	margin-bottom: 10px;
+}
+
+.container-fluid select,
 .container-fluid .btn,
 .container input.btn,
 .container a,
