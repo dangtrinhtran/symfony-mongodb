@@ -64,7 +64,7 @@
 				<td>{{ oPost.blog.title }}</td>
 				{% endif %}
 				<td>
-					<a class="btn btn-edit btn-info" href="{{ path('LikipeBackendBundle_Post_edit', {'iPostId': oPost.id}) }}">{% trans %}Edit post{% endtrans %}</a>
+					<a class="btn btn-edit btn-success" href="{{ path('LikipeBackendBundle_Post_edit', {'iPostId': oPost.id}) }}">{% trans %}Edit post{% endtrans %}</a>
 					<br><br>
 					{% if is_granted('ROLE_ADMIN') %}
 						<a class="btn btn-delete btn-danger" href="{{ path('LikipeBackendBundle_Post_delete', {'iPostId': oPost.id}) }}" onclick="return confirm('{% trans %}Are you sure you want to delete this post ?{% endtrans %}');">{% trans %}Delete post{% endtrans %}</a>

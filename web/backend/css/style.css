@@ -1,6 +1,20 @@
 /* ==========================================================================
    Author's: Mr Rony <rony@likipe.se>
    ========================================================================== */
+@font-face {
+    font-family: 'philosopherregular';
+    src: url('../fonts/philosopher-regular-webfont.eot');
+    src: url('../fonts/philosopher-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/philosopher-regular-webfont.woff') format('woff'),
+        url('../fonts/philosopher-regular-webfont.ttf') format('truetype'),
+        url('../fonts/philosopher-regular-webfont.svg#philosopherregular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+	font-family: 'philosopherregular';
+}
 
 .container-fluid .btn,
 .container input.btn,
