@@ -6,18 +6,28 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %}</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 		<link rel="icon" type="image/x-icon" href="{{ asset('backend/images/favicon.ico') }}" />
 		
-        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
-        
-        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
-		
-		{% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('backend/css/style.css?v=1.0') }}">
-		<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+        {% block stylesheets %}
+			{% if (app.environment == 'dev') %}
+				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/style.css?v=2.1') }}">
+			{% else %}
+				{% stylesheets
+					'backend/css/bootstrap.min.css'
+					'backend/css/bootstrap-responsive.min.css'
+					'backend/css/uniform.default.min.css'
+					'backend/css/style.css'
+					debug=false
+					output='backend/css/compiled-style.css' %}
+					<link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
+				{% endstylesheets %}
+			{% endif %}
 		{% endblock %}
 
         <script src="{{ asset('backend/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
@@ -29,50 +39,34 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 		<div id="container">
-				
 			<div id="main" role="main">
-				<div class="container-fluid">
-					<div class="row-fluid">
-						<div class="row-fluid">
-							<div class="span12 center login-header">
-								<h2>Symfony training with MongoDB</h2>
-							</div><!--/span-->
-						</div><!--/row-->
-						
-						<div class="row-fluid">
-							<div class="well span5 center login-box">
-								<div class="alert alert-info">
-									<h4>HOME PAGE!</h4>
-									<p>Symfony2.3</p>
-									<div class="center span10">
-										<p class="row-fluid">
-											<a class="btn btn-info span5" href="{{ path('LikipeBackendBundle_Security_login') }}">Go to backend</a>
-											<a class="btn btn-success span4" href="{{ path('fos_user_security_login') }}">Login</a>
-											<a class="btn btn-danger span3" href="{{ path('fos_user_registration_register') }}">Register</a>
-										</p>
-									</div>
-								</div>
-							</div><!--/span-->
-						</div><!--/row-->
-					</div><!--/fluid-row-->
-
-				</div><!--/.fluid-container-->
+				{% block content_login_backend %}
+				{% endblock content_login_backend %}
 			</div>
 		</div>
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
         <script>window.jQuery || document.write('<script src="{{ asset('backend/js/vendor/jquery-1.9.1.min.js') }}"><\/script>')</script>
-
-        <script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script>
 		
 		{% block javascripts %}
-        <script src="{{ asset('backend/js/script.js') }}"></script>
-		<!-- checkbox, radio, and file input styler -->
-		<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				$('#remember_me').uniform();
-			});
-		</script>
+			{% if (app.environment == 'dev') %}
+				<script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script> 
+				<script src="{{ asset('backend/js/script.js?v=2.1') }}"></script>
+				<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script> 
+			{% else %}
+				{% javascripts
+					'backend/js/libs/jquery.uniform.min.js'
+					'backend/js/vendor/bootstrap.min.js'
+					'backend/js/script.js'
+					debug=false
+					output='backend/js/compiled-script.js' %}
+				<script type="text/javascript" src="{{ asset_url }}"></script>
+				{% endjavascripts %}
+			{% endif %}
+			<script type="text/javascript">
+				jQuery(document).ready(function($) {
+					$('#remember_me').uniform();
+				});
+			</script>
 		{% endblock %}
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];

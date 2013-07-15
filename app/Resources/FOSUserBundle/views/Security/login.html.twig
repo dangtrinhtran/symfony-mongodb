@@ -1,5 +1,6 @@
 {% extends "LikipeFrontendBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
+{% block title %}Login{% endblock %}
 {% block fos_user_content %}
 {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 	<div class="row-fluid">
@@ -48,10 +49,10 @@
 					</div>
 					<div class="clearfix"></div>
 
-					<div class="center span5">
+					<div class="center span6">
 						<p class="row-fluid">
-							<button type="submit" id="_submit" name="_submit" class="btn btn-primary span8">Login</button>
-							<a class="btn btn-success span4" href="{{ path('_welcome') }}">Cancel</a>
+							<button type="submit" id="_submit" name="_submit" class="btn btn-primary span7">Login</button>
+							<a class="btn btn-success span5" href="{{ path('_welcome') }}">Cancel</a>
 						</p>
 					</div>
 				</fieldset>

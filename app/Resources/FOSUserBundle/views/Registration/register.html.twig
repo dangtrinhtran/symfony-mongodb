@@ -1,4 +1,5 @@
 {% extends "LikipeFrontendBundle::layout.html.twig" %}
+{% block title %}Register{% endblock %}
 {% block content %}
 {% if (app.user.username is not defined) %}
 	<div class="row-fluid">
@@ -9,33 +10,33 @@
 			<form id="userRegistration" class="registration-form form-horizontal custom-form fos_user_registration_register" action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST">
 				<h3>Register member with FOSUserBundle</h3>
 				<fieldset>
-					<div class="center span5 input-register">
+					<div class="center span7 input-register">
 						{{ form_errors(form) }}
 					</div>
-					<div class="center span5 input-register">
+					<div class="center span7 input-register">
 						{{ form_widget(form.firstname) }}
 						{{ form_widget(form.lastname) }}
 					</div>
-					<div class="center span5 input-register">
+					<div class="center span7 input-register">
 						{{ form_widget(form.gender) }}
 					</div>
-					<div class="center span5 input-register">
+					<div class="center span7 input-register">
 						{{ form_widget(form.username, { 'attr': {'placeholder': 'Username', 'required': 'required'} }) }}
 						{{ form_errors(form.username) }}
 					</div>	
-					<div class="center span5 input-register">
+					<div class="center span7 input-register">
 						{{ form_widget(form.email, { 'attr': {'placeholder': 'Email', 'required': 'required'} }) }}
 						{{ form_errors(form.email) }}
 					</div>
-					<div class="center span5 input-register">
+					<div class="center span7 input-register">
 						{{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Password', 'required': 'required'} }) }}
 						{{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Repeat Password', 'required': 'required'} }) }}
 						{{ form_errors(form.plainPassword) }}
 					</div>
-					<div class="center span5">
+					<div class="center span7">
 						<p class="row-fluid">
-							<button type="submit" id="_submit" name="_submit" class="btn btn-primary span8">{{ 'Register'|trans({}, 'FOSUserBundle') }}</button>
-							<a class="btn btn-success span4" href="{{ path('_welcome') }}">Cancel</a>
+							<button type="submit" id="_submit" name="_submit" class="btn btn-primary span7">{{ 'Register'|trans({}, 'FOSUserBundle') }}</button>
+							<a class="btn btn-success span5" href="{{ path('_welcome') }}">Cancel</a>
 						</p>
 					</div>
 					{{ form_widget(form._token) }}

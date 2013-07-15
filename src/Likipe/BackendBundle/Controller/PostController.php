@@ -29,6 +29,7 @@ class PostController extends Controller {
 		}
 		$iTotalPosts = count($aAllPosts);
 		$iPostsPerPage = $this->container->getParameter('max_post_on_post');
+		
 		$fLastPage = ceil($iTotalPosts / $iPostsPerPage);
 		$iPreviousPage = $iPage > 1 ? $iPage - 1 : 1;
 		$iNextPage = $iPage < $fLastPage ? $iPage + 1 : $fLastPage;

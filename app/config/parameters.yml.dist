@@ -18,5 +18,5 @@ parameters:
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
 
-    max_post_on_post: 5
+    max_post_on_post: 3
     path: http://localhost/symfony/kcfinder/browse.php

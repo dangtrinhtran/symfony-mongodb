@@ -35,13 +35,17 @@ div.selector,div.selector span,div.checker span,div.radio span,div.uploader,div.
 }
 
 body {
-	font-family: 'philosopherregular';
+	font-family: "Century Gothic", 'philosopherregular';
 }
 
+.container .blog > h2 {
+	text-transform: uppercase;
+}
+.h2-backend,
 .h2-frontend {
 	margin: 0;
 }
-
+.backend,
 .frontend {
 	margin: 0;
 	text-transform: uppercase;
