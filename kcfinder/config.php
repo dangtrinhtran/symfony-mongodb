@@ -25,7 +25,7 @@ $_CONFIG = array(
 
     'theme' => "oxygen",
 
-    'uploadURL' => "http://localhost/symfony/web/uploads/kcfinder",
+    'uploadURL' => "https://localhost/symfony-mongodb/web/uploads/kcfinder",
     'uploadDir' => "",
 
     'dirPerms' => 0755,

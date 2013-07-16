@@ -19,4 +19,4 @@ parameters:
     secret: ThisTokenIsNotSoSecretChangeIt
 
     max_post_on_post: 3
-    path: http://localhost/symfony/kcfinder/browse.php
+    path: https://localhost/symfony-mongodb/kcfinder/browse.php
