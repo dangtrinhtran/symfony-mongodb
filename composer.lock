@@ -273,12 +273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "0bf89a83e8c61428b207b4ad71c079c6e5534c3e"
+                "reference": "a68f323f44a5cbe0806b9e780261a15859c31379"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/0bf89a83e8c61428b207b4ad71c079c6e5534c3e",
-                "reference": "0bf89a83e8c61428b207b4ad71c079c6e5534c3e",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/a68f323f44a5cbe0806b9e780261a15859c31379",
+                "reference": "a68f323f44a5cbe0806b9e780261a15859c31379",
                 "shasum": ""
             },
             "require": {
@@ -315,7 +315,7 @@
                     "homepage": "http://avalanche123.com"
                 },
                 {
-                    "name": "Jonathan Wage",
+                    "name": "Jonathan H. Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/"
                 },
@@ -338,7 +338,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2013-07-04 19:12:04"
+            "time": "2013-07-15 14:47:18"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
