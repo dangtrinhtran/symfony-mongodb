@@ -29,6 +29,11 @@ body {
 	text-transform: uppercase;
 }
 
+a > [class^="icon-"] {
+	font-size: 16px;
+	padding-right: 7px;
+}
+
 .input-register > select,
 .input-register > input {
 	margin-bottom: 10px;

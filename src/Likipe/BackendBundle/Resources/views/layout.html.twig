@@ -22,12 +22,14 @@
 				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
 				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
 				<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/font-awesome/css/font-awesome.min.css') }}">
 				<link rel="stylesheet" href="{{ asset('backend/css/style.css?v=2.1') }}">
 			{% else %}
 				{% stylesheets
 					'backend/css/bootstrap.min.css'
 					'backend/css/bootstrap-responsive.min.css'
 					'backend/css/uniform.default.min.css'
+					'backend/font-awesome/css/font-awesome.min.css'
 					'backend/css/style.css'
 					debug=false
 					output='backend/css/compiled-style.css' %}
@@ -35,6 +37,9 @@
 				{% endstylesheets %}
 			{% endif %}
 		{% endblock %}
+		<!--[if IE 7]>
+		<link rel="stylesheet" href="{{ asset('backend/font-awesome/css/font-awesome-ie7.min.css') }}">
+		<![endif]-->
 
         <script src="{{ asset('backend/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
     </head>

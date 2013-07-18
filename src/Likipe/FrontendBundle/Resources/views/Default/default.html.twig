@@ -11,15 +11,30 @@
         <meta name="viewport" content="width=device-width">
 		<link rel="icon" type="image/x-icon" href="{{ asset('backend/images/favicon.ico') }}" />
 		
-        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
-        
-        <link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
-		
-		{% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('backend/css/style.css?v=1.0') }}">
-		<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+        {% block stylesheets %}
+			{% if (app.environment == 'dev') %}
+				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/bootstrap-responsive.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/uniform.default.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/font-awesome/css/font-awesome.min.css') }}">
+				<link rel="stylesheet" href="{{ asset('backend/css/style.css?v=2.1') }}">
+			{% else %}
+				{% stylesheets
+					'backend/css/bootstrap.min.css'
+					'backend/css/bootstrap-responsive.min.css'
+					'backend/css/uniform.default.min.css'
+					'backend/font-awesome/css/font-awesome.min.css'
+					'backend/css/style.css'
+					debug=false
+					output='backend/css/compiled-style.css' %}
+					<link type="text/css" href="{{ asset_url }}" rel="stylesheet" />
+				{% endstylesheets %}
+			{% endif %}
 		{% endblock %}
-
+		<!--[if IE 7]>
+		<link rel="stylesheet" href="{{ asset('backend/font-awesome/css/font-awesome-ie7.min.css') }}">
+		<![endif]-->
+		
         <script src="{{ asset('backend/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js') }}"></script>
     </head>
     <body>
@@ -46,8 +61,8 @@
 									<p>Symfony2.3</p>
 									<div class="center span10">
 										<p class="row-fluid">
-											<a class="btn btn-info span5" href="{{ path('LikipeBackendBundle_Security_login') }}">Go to backend</a>
-											<a class="btn btn-success span4" href="{{ path('fos_user_security_login') }}">Login</a>
+											<a class="btn btn-info span5" href="{{ path('LikipeBackendBundle_Security_login') }}"><i class="icon-hand-left"></i>Go to backend</a>
+											<a class="btn btn-success span4" href="{{ path('fos_user_security_login') }}"><i class="icon-signin"></i>Login</a>
 											<a class="btn btn-danger span3" href="{{ path('fos_user_registration_register') }}">Register</a>
 										</p>
 									</div>
