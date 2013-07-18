@@ -73,7 +73,15 @@ fos_user:
     db_driver: mongodb
     firewall_name: main
     user_class: Likipe\FrontendBundle\Document\Member
+    service:
+        mailer: fos_user.mailer.twig_swift
+    from_email:
+        address: KIMDANH8XX@gmail.com
+        sender_name:    Admin Symfony2.3.1
     registration:
+        confirmation:
+            enabled: true # change to true for required email confirmation
+            template: LikipeFrontendBundle:Registration:email.html.twig
         form:
             type: likipe_member_registration
     

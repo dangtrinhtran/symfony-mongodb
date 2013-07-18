@@ -1,31 +1,5 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
-{% block title %}{% trans %}Återställ lösenord{% endtrans %}{% endblock %}
-
 {% block fos_user_content %}
-{% trans_default_domain 'FOSUserBundle' %}
-
-<h3 class="title-login">{% trans %}Återställ lösenord{% endtrans %}</h3>
-<div class="space-top login-form">
-    <div class="row-fluid">
-        <div class="span5 login offset3">
-            <form action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset space-top">
-            	{% for pass_form in form.plainPassword %}
-                <div class="row-fluid log-name">
-                    <span class="help-inline span4">{{ form_label(pass_form) }}</span>
-                    <div class="span8">
-                    	{{ form_widget(pass_form) }}
-                        {{ form_errors(form.plainPassword) }}
-                    </div>
-                </div>
-                {% endfor %}
-                <div class="row-fluid">
-                	<input type="submit" value="{{ 'resetting.reset.submit'|trans }}" class=" btn btn-info pull-right"/>
-                </div>
-                <div class="break-bottom"></div>
-                {{ form_widget(form) }}
-            </form>
-        </div>
-    </div>
-</div>
+{% include "FOSUserBundle:Resetting:reset_content.html.twig" %}
 {% endblock fos_user_content %}

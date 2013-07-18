@@ -1,12 +1,11 @@
 {% extends "LikipeFrontendBundle::layout.html.twig" %}
 {% trans_default_domain 'FOSUserBundle' %}
-{% block title %}Confirmed{% endblock %}
+{% block title %}Check email{% endblock %}
 {% block fos_user_content %}
 	<div class="row-fluid">
 		<div class="well span5 center login-box">
 			<div class="alert alert-info">
-				<h4 class="alert-heading">Hello <strong>{{user.username}}</strong></h4>
-				Confirm your account successfully. Thanks.
+				Please confirm your Symfony account in email <strong>{{user.email}}</strong> before login. Thanks.
 			</div>
 			<div class="center span6">
 				<p class="row-fluid">
@@ -16,8 +15,4 @@
 			</div>
 		</div><!--/span-->
 	</div><!--/row-->
-	{% if app.session is not empty %}
-        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
-        {% if targetUrl is not empty %}<p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>{% endif %}
-    {% endif %}
 {% endblock fos_user_content %}
