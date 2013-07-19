@@ -1,0 +1,18 @@
+{% extends "LikipeFrontendBundle::layout.html.twig" %}
+{% block content %}
+<div class="row-fluid">
+	<div class="well span5 center login-box">
+		<div class="alert alert-info">
+			<h4>HOME PAGE - Profile</h4>
+			<p>Symfony2.3</p>
+			<div class="center span10">
+				<p class="row-fluid">
+					<span class="login-success label label-success span6">{{ app.user.username }} Login Success</span>
+					<a class="btn edit-success btn-warning span3" style="margin-top: 0" href="{{ path('fos_user_profile_edit') }}"><i class="icon-edit"></i>Edit profile</a>
+					<a class="btn logout-success btn-danger span3" href="{{ path('fos_user_security_logout') }}">Logout</a>
+				</p>
+			</div>
+		</div>
+	</div><!--/span-->
+</div><!--/row-->
+{% endblock content %}

@@ -78,6 +78,16 @@ fos_user:
     from_email:
         address: KIMDANH8XX@gmail.com
         sender_name:    Admin Symfony2.3.1
+    profile:
+        form:
+            type: fos_user_profile
+            name: fos_user_profile_form
+            validation_groups:  [Profile, Default]
+    change_password:
+        form:
+            type:               fos_user_change_password
+            name:               fos_user_change_password_form
+            validation_groups:  [ChangePassword, Default]
     registration:
         confirmation:
             enabled: true # change to true for required email confirmation
