@@ -12,6 +12,13 @@
 				<div class="form-info">
 				{{ form_widget(form) }}
 				</div>
+					<button id="remove-image-upload" style="display: none">
+						<i class="icon-remove"></i>
+						Remove
+					</button>
+				<div class="preview">
+					<img id="thumb" width="212px" height="205px" src="{{ asset('backend/images/index.jpg') }}" />
+				</div>
 				{{ form_rest(form) }}
 				</div>
 				<div class="form-action" style="padding-top: 50px;">

@@ -64,12 +64,16 @@
 		</div>
         <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
         <script>window.jQuery || document.write('<script src="{{ asset('backend/js/vendor/jquery-1.9.1.min.js') }}"><\/script>')</script>
-		
+		<script type="text/javascript">
+			jQuery.noConflict();
+			// Code that uses other library's $ can follow here.
+		</script>
 		{% block javascripts %}
 			{% if (app.environment == 'dev') %}
 				<script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script> 
 				<script src="{{ asset('backend/js/script.js?v=2.1') }}"></script>
-				<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script> 
+				<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script>
+				<script src="{{ asset('backend/js/libs/jquery-ajax-image-upload.js') }}"></script>
 			{% else %}
 				{% javascripts
 					'backend/js/libs/jquery.uniform.min.js'
