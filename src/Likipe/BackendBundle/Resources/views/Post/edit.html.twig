@@ -12,7 +12,9 @@
 					<div class="form-info">
 					{{ form_widget(form) }}
 					{% if oPost.featuredimage is not null %}
-							<img src="{{ asset(oPost.featuredimage) }}" class="img-polaroid">
+						<div class="preview">
+							<img src="{{ asset(oPost.featuredimage) }}" class="img-polaroid" id="img-preview">
+						</div>
 					{% endif %}
 					</div>
 				{{ form_rest(form) }}
