@@ -1,5 +1,3 @@
 jQuery(document).ready(function($) {
-	$('#post_featuredimage').uniform();
-	$('.status-post > input').uniform();
-	
+	$('#post_featuredimage, .status-post > input').uniform();
 });

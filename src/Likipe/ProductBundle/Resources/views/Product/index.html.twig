@@ -1,0 +1,54 @@
+{% extends "LikipeBackendBundle::layout.html.twig" %}
+{% block title "Product" %}
+{% block content %}
+<div class="container">
+{% for flashMessage in app.session.flashbag.get('product_success') %}
+	<div class="alert alert-success">
+		<button title="Close" class="close" data-dismiss="alert" type="button">×</button>
+	{{ flashMessage }}
+	</div>
+{% endfor %}
+	<div class="row-fluid blog">		
+		<h2 style="padding-bottom: 20px;">List products!</h2>
+		<table class="list-posts table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>STT</th>
+					<th>Product ID</th>
+					<th>Product name</th>
+					<th>Product price</th>
+					<th>Created product</th>
+					<th>Updated product</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+			{% for product in aProducts %}
+				<tr style="border-bottom: 1px solid rgba(0, 0, 0, 0.15); padding-bottom: 15px;">
+					<td>{{ loop.index }}</td>
+					<td>{{ product.id }}</td>
+					<td>{{ product.name }}</td>
+					<td>{{ product.price }}</td>
+					{% set oDateCreate =  product.created %}
+					<td>{{ formatDateTime(oDateCreate) }}</td>
+					{% set oDateUpdate =  product.updated %}
+					<td>{{ formatDateTime(oDateUpdate) }}</td>
+					<td>
+						
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+		
+		<div class="pagination pagination-small pagination-right">
+			
+		</div>
+	
+		<div class="btn-submit-post" style="padding-top: 20px; padding-bottom: 50px;">	
+			<a class="btn btn-success" href="{{ path('LikipeProductBundle_Product_add') }}"><i class="icon-plus"></i>{% trans %}Create product{% endtrans %}</a>
+		</div>
+	</div>
+</div> <!-- /container -->
+{% endblock %}

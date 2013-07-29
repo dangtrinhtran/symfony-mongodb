@@ -1,0 +1,9 @@
+LikipeProductBundle_Product_add:
+    pattern:  /add.{_format}
+    defaults: { _controller: "LikipeProductBundle:Product:add", _format: html }
+    requirements: 
+      _format:  html
+
+LikipeProductBundle_Product_index:
+    pattern:  /
+    defaults: { _controller: "LikipeProductBundle:Product:index" }

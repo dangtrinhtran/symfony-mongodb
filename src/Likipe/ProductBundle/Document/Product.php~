@@ -1,0 +1,47 @@
+<?php
+
+// src/Likipe/ProductBundle/Document/Product.php
+
+namespace Likipe\ProductBundle\Document;
+
+use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+
+/**
+ * @MongoDB\Document(collection="Likipe_Product", repositoryClass="Likipe\ProductBundle\Repository\ProductRepository")
+ */
+class Product {
+
+	/**
+	 * @MongoDB\Id(strategy="auto")
+	 */
+	protected $id;
+
+	/**
+	 * @MongoDB\String
+	 */
+	protected $name;
+
+	/**
+     * @MongoDB\Float
+     */
+	protected $price;
+
+	/**
+	 * @MongoDB\Date
+	 */
+	protected $created;
+	
+	/**
+	 * @MongoDB\Date
+	 */
+	protected $updated;
+	
+	/**
+	 * @MongoDB\Boolean
+	 */
+	public $active;
+	
+	public function __construct() {
+		$this->active = TRUE;
+	}
+}

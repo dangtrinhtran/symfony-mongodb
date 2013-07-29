@@ -16,8 +16,8 @@
 						{% if is_granted('ROLE_ADMIN') %}
 							<li><a href="{{ path('LikipeBackendBundle_Blog_index') }}">Blog</a></li>
 							<li><a href="{{ path('LikipeBackendBundle_User_index') }}">User management</a></li>
+							<li><a href="{{ path('LikipeProductBundle_Product_index') }}">Product</a></li>
 						{% endif %}
-						<li><a href="#">Contact</a></li>
 					</ul>
 					{% endblock %}
 					<div class="logout pull-right">

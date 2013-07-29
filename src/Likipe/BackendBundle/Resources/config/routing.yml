@@ -28,3 +28,7 @@ LikipeBackendBundle_Security_login_check:
 LikipeBackendBundle_Security_logout:
     pattern:  /logout
     defaults: { _controller: "LikipeBackendBundle:Security:logout" }
+    
+Likipe_Product:
+    resource: "@LikipeProductBundle/Resources/config/routing.yml"
+    prefix:   /product

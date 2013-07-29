@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Likipe\BackendBundle\LikipeBackendBundle(),
 			new FOS\UserBundle\FOSUserBundle(),
             new Likipe\FrontendBundle\LikipeFrontendBundle(),
+            new Likipe\ProductBundle\LikipeProductBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
