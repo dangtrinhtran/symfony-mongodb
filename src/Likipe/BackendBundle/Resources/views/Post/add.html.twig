@@ -5,7 +5,7 @@
 
 	<div class="row-fluid blog">
 		<h1>Create new post!</h1>
-		<form class="form-post" action="" method="post" {{ form_enctype(form) }}>
+		<form class="form-post" action="{{ path('LikipeBackendBundle_Post_add') }}" method="post" {{ form_enctype(form) }}>
 			<div class="content">
 			{{ form_errors(form) }}
 			<div class="form-content clearfix row-fluid">
@@ -13,7 +13,7 @@
 				{{ form_widget(form) }}
 				</div>
 				<div class="preview">
-					<img id="thumb" width="212px" height="205px" src="{{ asset('backend/images/index.jpg') }}" />
+					<img class="img-polaroid" id="img-preview" src="{{ asset('backend/images/index.jpg') }}" />
 				</div>
 				{{ form_rest(form) }}
 				</div>

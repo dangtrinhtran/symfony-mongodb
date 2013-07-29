@@ -64,6 +64,11 @@ class PostController extends Controller {
 		/**
 		 * Form for symfony3
 		 */
+		if ($this->getRequest()->files->get('post[featuredimage]')) {
+			echo 'trinh dmfdsfdkj';
+			exit;
+		}
+		
 		$form->handleRequest($request);
 		if ($form->isValid()) {
 			//Upload file
