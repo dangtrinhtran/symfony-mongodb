@@ -16,13 +16,38 @@ body {
 	font-family: "Century Gothic", 'philosopherregular';
 }
 
+body h1, body h2, body h3, body h4, body h5, body h6 {
+	font-family: "Century Gothic", 'philosopherregular';
+}
+
 .container .blog > h2 {
 	text-transform: uppercase;
 }
+
+.form-action {
+	padding-bottom: 50px;
+}
+
 .h2-backend,
 .h2-frontend {
 	margin: 0;
 }
+
+#container .container {
+	width: auto;
+	max-width: none;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.navbar-brand.title {
+	max-width: none;
+}
+
+.logout {
+	padding-top: 5px;
+}
+
 .backend,
 .frontend {
 	margin: 0;
@@ -98,7 +123,7 @@ footer .container p {
 	height: 26px;
 	text-align: center;
 	display: block;
-	line-height: 26px;
+	line-height: 20px;
 	padding-left: 10px;
 	padding-right: 10px;
 	margin-left: auto !important;
@@ -118,7 +143,7 @@ footer .container p {
 }
 
 .lastname {
-	color: #317EAC;
+	color: #000;
 	margin-right: 20px;
 	font-size: 16px;
 	font-weight: 400;

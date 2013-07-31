@@ -43,7 +43,7 @@
 				<th>{{ oPost.slug }}</th>
 				<th>
 					{% if oPost.featuredimage is not empty %}
-					<img src="{{ asset(oPost.featuredimage) }}" class="img-polaroid">
+					<img src="{{ asset(oPost.featuredimage) }}" class="img-thumbnail">
 					{% endif %}
 				</th>
 				<th>
@@ -65,22 +65,22 @@
 				{% endif %}
 				<td>
 					<a class="btn btn-edit btn-success" href="{{ path('LikipeBackendBundle_Post_edit', {'iPostId': oPost.id}) }}"><i class="icon-edit"></i>{% trans %}Edit post{% endtrans %}</a>
-					<br><br>
+					<br>
 					{% if is_granted('ROLE_ADMIN') %}
 						<a class="btn btn-delete btn-danger" href="{{ path('LikipeBackendBundle_Post_delete', {'iPostId': oPost.id}) }}" onclick="return confirm('{% trans %}Are you sure you want to delete this post ?{% endtrans %}');"><i class="icon-trash"></i>{% trans %}Delete post{% endtrans %}</a>
 					{% endif %}
-					<br><br>
+					<br>
 					<a class="btn-list-comment btn btn-primary" href="{{ path('LikipeBackendBundle_Comment_index', {'iPostId': oPost.id}) }}"><i class="icon-comments"></i>{% trans %}List comments{% endtrans %}</a>
 					<br><br>
-					<a class="btn-add-comment btn btn-inverse" href="{{ path('LikipeBackendBundle_Comment_add', {'iPostId': oPost.id}) }}"><i class="icon-comment-alt"></i>{% trans %}Add comment{% endtrans %}</a>
+					<a class="btn-add-comment btn btn-warning" href="{{ path('LikipeBackendBundle_Comment_add', {'iPostId': oPost.id}) }}"><i class="icon-comment-alt"></i>{% trans %}Add comment{% endtrans %}</a>
 				</td>
 				</tr>
 			{% endfor %}
 			</tbody>
 		</table>
 		{% if fLastPage > 1 %}
-		<div class="pagination pagination-small pagination-right">
-			<ul>
+		<div class="pull-right">
+			<ul class="pagination pagination-small pagination-right">
 				<li class="first"><a href="{{ path('LikipeBackendBundle_Post_index', { 'iPage': 1 }) }}">First</a></li>
 				<li><a href="{{ path('LikipeBackendBundle_Post_index', { 'iPage': iPreviousPage }) }}">«</a></li>
 				{% for iPage in 1..fLastPage %}

@@ -45,7 +45,7 @@
 						<span class="label label-comment label-success">Enable</span>
 						{% if is_granted('ROLE_ADMIN') %}
 						<br>
-						<a class="btn btn-enable btn-inverse" href="{{ path('LikipeBackendBundle_Comment_disable', {'iPostId': iPostId, 'iCommentId': oComment.id}) }}">Disable Comment</a>
+						<a class="btn-enable btn btn-default" href="{{ path('LikipeBackendBundle_Comment_disable', {'iPostId': iPostId, 'iCommentId': oComment.id}) }}">Disable Comment</a>
 						{% endif %}
 					{% endif %}
 					</td>
