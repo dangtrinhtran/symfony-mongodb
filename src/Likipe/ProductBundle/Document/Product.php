@@ -40,8 +40,14 @@ class Product {
 	 * @MongoDB\Boolean
 	 */
 	public $active;
+	
+	/**
+     * @MongoDB\EmbedMany(targetDocument="Likipe\ProductBundle\Document\Gallery")
+     */
+	protected $galleries = array();
 
 	public function __construct() {
+		$this->galleries = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->active = TRUE;
 	}
 	
@@ -169,4 +175,31 @@ class Product {
 		return $this->active;
 	}
 
+
+    /**
+	 * Add galleries
+	 *
+	 * @param Likipe\ProductBundle\Document\Gallery $galleries
+	 */
+	public function addGallerie(\Likipe\ProductBundle\Document\Gallery $galleries) {
+		$this->galleries[] = $galleries;
+	}
+
+	/**
+	 * Remove galleries
+	 *
+	 * @param Likipe\ProductBundle\Document\Gallery $galleries
+	 */
+	public function removeGallerie(\Likipe\ProductBundle\Document\Gallery $galleries) {
+		$this->galleries->removeElement($galleries);
+	}
+
+	/**
+	 * Get galleries
+	 *
+	 * @return Doctrine\Common\Collections\Collection $galleries
+	 */
+	public function getGalleries() {
+		return $this->galleries;
+	}
 }

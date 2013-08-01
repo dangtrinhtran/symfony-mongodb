@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
-	$('#post_featuredimage, .status-post > input').uniform();
+	$('.status-post > input').uniform();
+	$('input[type="file"]').filestyle({classButton: "btn btn-primary"});
 });
 
 (function() {
