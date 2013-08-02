@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "4b6b9345c74c46e7da0edb906c259036",
+    "hash": "da359375bcff149126bf2ba46637e2f2",
     "packages": [
         {
             "name": "doctrine/common",
@@ -273,12 +273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/mongodb-odm.git",
-                "reference": "42c2f7e1f89557bb7861bb1363d26b2e6b1742a9"
+                "reference": "1c0d70ff7af69ca991b44c96a0788c9763a6c4f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/42c2f7e1f89557bb7861bb1363d26b2e6b1742a9",
-                "reference": "42c2f7e1f89557bb7861bb1363d26b2e6b1742a9",
+                "url": "https://api.github.com/repos/doctrine/mongodb-odm/zipball/1c0d70ff7af69ca991b44c96a0788c9763a6c4f8",
+                "reference": "1c0d70ff7af69ca991b44c96a0788c9763a6c4f8",
                 "shasum": ""
             },
             "require": {
@@ -338,7 +338,7 @@
                 "odm",
                 "persistence"
             ],
-            "time": "2013-07-31 21:47:49"
+            "time": "2013-08-01 20:16:05"
         },
         {
             "name": "doctrine/mongodb-odm-bundle",
