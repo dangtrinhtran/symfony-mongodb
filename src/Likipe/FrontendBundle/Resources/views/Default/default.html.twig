@@ -78,6 +78,8 @@
         <script>window.jQuery || document.write('<script src="{{ asset('backend/js/vendor/jquery-1.10.1.min.js') }}"><\/script>')</script>
 
         <script src="{{ asset('backend/js/vendor/bootstrap.min.js') }}"></script>
+		<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+		<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
 		
 		{% block javascripts %}
         <script src="{{ asset('backend/js/script.js') }}"></script>

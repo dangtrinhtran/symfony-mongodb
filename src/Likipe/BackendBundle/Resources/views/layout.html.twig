@@ -70,11 +70,13 @@
 				<script src="{{ asset('backend/js/script.js?v=2.1') }}"></script>
 				<script src="{{ asset('backend/js/libs/jquery.uniform.min.js') }}"></script>
 				<script src="{{ asset('backend/js/libs/bootstrap-filestyle.min.js') }}"></script>
+				<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 			{% else %}
 				{% javascripts
 					'backend/js/libs/jquery.uniform.min.js'
 					'backend/js/libs/bootstrap-filestyle.min.js'
 					'backend/js/vendor/bootstrap.min.js'
+					'bundles/fosjsrouting/js/router.js'
 					'backend/js/script.js'
 					debug=false
 					output='backend/js/compiled-script.js' %}
@@ -82,6 +84,7 @@
 				{% endjavascripts %}
 			{% endif %}
 		{% endblock %}
+		<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>		
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];

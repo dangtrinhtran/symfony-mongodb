@@ -22,6 +22,7 @@ class AppKernel extends Kernel
 			new FOS\UserBundle\FOSUserBundle(),
             new Likipe\FrontendBundle\LikipeFrontendBundle(),
             new Likipe\ProductBundle\LikipeProductBundle(),
+			new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
