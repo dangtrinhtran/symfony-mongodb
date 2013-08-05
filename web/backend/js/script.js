@@ -1,6 +1,39 @@
 jQuery(document).ready(function($) {
 	$('.status-post > input').uniform();
 	$('input[type="file"]').filestyle({classButton: "btn btn-primary"});
+
+	/**
+	 * Upload image with JQuery Ajax
+	 * @author Rony<rony@likipe.se>
+	 * @return {FormData} File upload
+	 */
+	$('#fileupload').change(function(e){
+		/*var aFileUpload = new Array();
+		var file = $("#fileupload").val();
+		
+		var sContent = '{';
+		sContent += '"filename":"' + file + '"';
+		sContent += '}';
+		aFileUpload[0] = $.parseJSON(sContent);
+		*/
+		var aFileUpload = new FormData();
+		aFileUpload.append("filesUpload", this.files[0]);
+		
+		$.ajax({
+			type: 'POST',
+			url: Routing.generate('LikipeProductBundle_Product_uploadAjax'),
+			//contentType: 'application/json',
+			name: 'filesUpload',
+			//data: JSON.stringify(aFileUpload),
+			processData: false,
+			contentType: false,
+			data: aFileUpload,
+			success: function(data) {
+				alert('success');
+			}
+		});
+		e.preventDefault();
+		}).submit();
 });
 
 (function() {

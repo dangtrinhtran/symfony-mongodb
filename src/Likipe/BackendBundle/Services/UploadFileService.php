@@ -48,13 +48,11 @@ class UploadFileService {
 		
 		foreach ($aFile as $aFiles) {
 			if($aFiles['error'][$sKey] > 0) {
-				$response = 'File error!';
 				return;
 			} else {
 				$valid_file = TRUE;
 				if ($aFiles['size'][$sKey] > (1024000)) { //can't be larger than 1 MB
 					$valid_file = FALSE;
-					$response = "File error! Can't be larger than 1 MB";
 					return;
 				}
 				if ($valid_file) {
@@ -63,13 +61,10 @@ class UploadFileService {
 					$fileUpload = $fileName['filename'] . '-' . time('now') . '.' . $fileName['extension'];
 					move_uploaded_file($aFiles['tmp_name'][$sKey], $this->getUploadRootDir() . $fileUpload);
 					$aFile = NULL;
-					$response = "Successfully!";
 					return $this->getUploadDir() . $fileUpload;
 				}
 			}
 		}
-		$array['response'] = $response;
-		echo json_encode($array);
 	}
 	
 	

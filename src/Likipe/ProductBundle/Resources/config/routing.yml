@@ -7,3 +7,10 @@ LikipeProductBundle_Product_add:
 LikipeProductBundle_Product_index:
     pattern:  /
     defaults: { _controller: "LikipeProductBundle:Product:index" }
+    
+LikipeProductBundle_Product_uploadAjax:
+    pattern:  /upload-ajax
+    defaults: { _controller: "LikipeProductBundle:Product:uploadAjax" }
+    methods: [POST]
+    options:
+        expose: true

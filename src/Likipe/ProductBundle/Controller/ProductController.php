@@ -5,6 +5,7 @@ namespace Likipe\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Likipe\ProductBundle\Form\ProductType;
 use Likipe\ProductBundle\Document\Product;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
@@ -66,5 +67,14 @@ class ProductController extends Controller {
 		return $this->render('LikipeProductBundle:Product:add.html.twig', array(
 					'form' => $form->createView()
 		));
+	}
+	
+	public function uploadAjaxAction(Request $request) {
+		#$data = json_decode($request->getContent());
+		if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
+            $aFileUpload = isset($_FILES['filesUpload']) ? $_FILES['filesUpload'] : null;
+        }
+				
+		return new Response(json_encode($aFileUpload, JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
 	}
 }
