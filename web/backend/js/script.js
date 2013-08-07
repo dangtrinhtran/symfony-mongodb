@@ -8,17 +8,14 @@ jQuery(document).ready(function($) {
 	 * @return {FormData} File upload
 	 */
 	$('#fileupload').change(function(e){
-		/*var aFileUpload = new Array();
-		var file = $("#fileupload").val();
 		
-		var sContent = '{';
-		sContent += '"filename":"' + file + '"';
-		sContent += '}';
-		aFileUpload[0] = $.parseJSON(sContent);
-		*/
 		var aFileUpload = new FormData();
 		aFileUpload.append("filesUpload", this.files[0]);
-		
+			var sHtml = '';
+			sHtml += '<li class="image-item">';
+			sHtml += '<img class="img-thumbnail img-current" src="https://localhost/symfony-mongodb/web/backend/images/ajax-loader.gif" >';
+			sHtml += '</li>';
+			$(sHtml).appendTo('.images-response');
 		$.ajax({
 			type: 'POST',
 			url: Routing.generate('LikipeProductBundle_Product_uploadAjax'),
@@ -29,7 +26,10 @@ jQuery(document).ready(function($) {
 			contentType: false,
 			data: aFileUpload,
 			success: function(data) {
-				alert('success');
+				var $img = $('.images-response li img.img-current');
+				var url = 'https://localhost/symfony-mongodb/web/' + data.url;
+				$img.attr('src', url);
+				$img.removeClass('img-current');
 			}
 		});
 		e.preventDefault();
