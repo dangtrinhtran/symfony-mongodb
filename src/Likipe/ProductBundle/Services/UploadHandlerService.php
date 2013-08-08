@@ -1,4 +1,5 @@
 <?php
+
 namespace Likipe\ProductBundle\Services;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -6,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 class UploadHandlerService {
 
 	private $options;
-	
+
 	function __construct($options) {
 		$options = array(
 			'upload_dir' => $this->getUploadRootDir(),
@@ -15,14 +16,15 @@ class UploadHandlerService {
 			// Set the following option to 'POST', if your server does not support
 			// DELETE requests. This is a parameter sent to the client:
 			'delete_type' => 'DELETE',
-			'error_empty'	=> 'File upload empty!',
-			'error_array'	=> 'File upload in request body must be an array.',
-			'file_error'	=> 'File upload error.',
-			'error_size'	=> "File upload can't be larger than 1 MB."
+			'error_empty' => 'File upload empty!',
+			'error_array' => 'File upload in request body must be an array.',
+			'file_error' => 'File upload error.',
+			'error_size' => "File upload can't be larger than 1 MB.",
+			'request_error' => 'Request error!'
 		);
 		$this->options = $options;
 	}
-	
+
 	/**
 	 * Get rid of the __DIR__ so it doesn't screw up
 	 * When displaying uploaded doc/image in the view.
@@ -51,10 +53,23 @@ class UploadHandlerService {
 	protected function getUploadRootDir() {
 		return __DIR__ . '/../../../../web/' . $this->getUploadDir();
 	}
+
+	/**
+	 * Upload file with ajax
+	 * @author Rony <rony@likipe.se>
+	 * @param string $folder Folder upload
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	
-	public function uploadAjax() {
+	public function uploadAjax($folder = '') {
+		
+		if (!empty($folder)) {
+			$this->options['upload_url'] = $folder;
+			$this->options['upload_dir'] = $this->getUploadRoot() . $folder;
+		}
+		
 		if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-			$aFileUpload = isset($_FILES[$this->options['param_name']]) ? 
+			$aFileUpload = isset($_FILES[$this->options['param_name']]) ?
 					$_FILES[$this->options['param_name']] : null;
 
 			if (empty($aFileUpload)) {
@@ -75,7 +90,7 @@ class UploadHandlerService {
 								), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
 			} else {
 				$validFile = TRUE;
-				if ($aFileUpload['size'] > (1024000)) { //can't be larger than 1 MB
+				if ($aFileUpload['size'] > (1024000)) {
 					$validFile = FALSE;
 					return new Response(json_encode(array(
 								'error' => $this->options['error_size']
@@ -95,7 +110,11 @@ class UploadHandlerService {
 					$aFileUpload = NULL;
 				}
 			}
+			return new Response(json_encode($dataResponse, JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
 		}
-		return new Response(json_encode($dataResponse, JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
+		return new Response(json_encode(array(
+					'error' => $this->options['request_error']
+						), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
 	}
+
 }
