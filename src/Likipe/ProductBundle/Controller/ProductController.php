@@ -5,7 +5,6 @@ namespace Likipe\ProductBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Likipe\ProductBundle\Form\ProductType;
 use Likipe\ProductBundle\Document\Product;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends Controller {
@@ -68,80 +67,8 @@ class ProductController extends Controller {
 					'form' => $form->createView()
 		));
 	}
-	
-	/**
-	 * Get rid of the __DIR__ so it doesn't screw up
-	 * When displaying uploaded doc/image in the view.
-	 * @author Rony <rony@likipe.se>
-	 * @return string
-	 */
-	protected function getUploadDir() {
-		return 'uploads/products/';
-	}
 
-	/**
-	 * Get directory path when upload.
-	 * @author Rony <rony@likipe.se>
-	 * @return string
-	 */
-	protected function getUploadRoot() {
-		return __DIR__ . '/../../../../web/';
-	}
-
-	/**
-	 * The absolute directory path where uploaded.
-	 * Documents should be saved.
-	 * @author Rony <rony@likipe.se>
-	 * @return string
-	 */
-	protected function getUploadRootDir() {
-		return __DIR__ . '/../../../../web/' . $this->getUploadDir();
-	}
-	
 	public function uploadAjaxAction() {
-		#$data = json_decode($request->getContent());
-		if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
-            $aFileUpload = isset($_FILES['filesUpload']) ? $_FILES['filesUpload'] : null;
-			
-			if (empty($aFileUpload)) {
-				return new Response(json_encode(array(
-					'error' => 'File upload empty!'
-						), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
-			}
-			
-			if (!is_array($aFileUpload)) {
-				return new Response(json_encode(array(
-					'error' => 'File upload in request body must be an array.'
-						), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
-			}
-			
-			if ($aFileUpload['error'] > 0) {
-				return new Response(json_encode(array(
-				'error' => 'File upload error.'
-					), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
-			} else {
-				$valid_file = TRUE;
-				if ($aFileUpload['size'] > (1024000)) { //can't be larger than 1 MB
-					$valid_file = FALSE;
-					return new Response(json_encode(array(
-						'error' => "File upload can't be larger than 1 MB."
-							), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
-				}
-				if ($valid_file) {
-					$fileName = pathinfo($aFileUpload['name']);
-
-					$fileUpload = $fileName['filename'] . '-' . time('now') . '.' . $fileName['extension'];
-					move_uploaded_file($aFileUpload['tmp_name'], $this->getUploadRootDir() . $fileUpload);
-					$dataResponse = array(
-						'filename' => $fileUpload,
-						'url' => $this->getUploadDir() . $fileUpload,
-						'filesize' => $aFileUpload['size'],
-						'extension' => $aFileUpload['type']
-					);
-					$aFileUpload = NULL;
-				}
-			}
-        }
-		return new Response(json_encode($dataResponse, JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
+		return $this->get("likipe.uploadfile.service")->uploadAjax();
 	}
 }

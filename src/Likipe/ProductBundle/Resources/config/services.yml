@@ -1,7 +1,7 @@
 parameters:
-#    likipe_product.example.class: Likipe\ProductBundle\Example
+    likipe_uploadfile_services:      Likipe\ProductBundle\Services\UploadHandlerService
 
 services:
-#    likipe_product.example:
-#        class: %likipe_product.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    likipe.uploadfile.service:
+        class: %likipe_uploadfile_services%
+        arguments: ["@service_container"]
