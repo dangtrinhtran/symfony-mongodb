@@ -83,7 +83,7 @@ class UploadHandlerService {
 							'error' => $this->options['error_array']
 								), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
 			}
-
+			$dataResponse = array();
 			if ($aFileUpload['error'] > 0) {
 				return new Response(json_encode(array(
 							'error' => $this->options['file_error']
