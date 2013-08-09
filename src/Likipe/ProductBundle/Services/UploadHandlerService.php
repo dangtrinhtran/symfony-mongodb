@@ -116,5 +116,7 @@ class UploadHandlerService {
 					'error' => $this->options['request_error']
 						), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
 	}
+	
+	
 
 }

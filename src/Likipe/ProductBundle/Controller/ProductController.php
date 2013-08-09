@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Likipe\ProductBundle\Form\ProductType;
 use Likipe\ProductBundle\Document\Product;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller {
 	
@@ -70,5 +71,10 @@ class ProductController extends Controller {
 
 	public function uploadAjaxAction() {
 		return $this->get("likipe.uploadfile.service")->uploadAjax();
+	}
+	
+	public function deleteAjaxAction(Request $request) {
+		$data = json_decode($request->getContent());
+		return new Response(json_encode($data, JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
 	}
 }

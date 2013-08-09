@@ -14,3 +14,10 @@ LikipeProductBundle_Product_uploadAjax:
     methods: [POST]
     options:
         expose: true
+        
+LikipeProductBundle_Product_deleteAjax:
+    pattern:  /delete-ajax
+    defaults: { _controller: "LikipeProductBundle:Product:deleteAjax" }
+    methods: [DELETE]
+    options:
+        expose: true
