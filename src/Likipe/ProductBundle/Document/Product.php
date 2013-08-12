@@ -5,6 +5,7 @@
 namespace Likipe\ProductBundle\Document;
 
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
+use Likipe\ProductBundle\Document\Gallery;
 
 /**
  * @MongoDB\Document(collection="Likipe_Product", repositoryClass="Likipe\ProductBundle\Repository\ProductRepository")
@@ -183,6 +184,23 @@ class Product {
 	 */
 	public function addGallerie(\Likipe\ProductBundle\Document\Gallery $galleries) {
 		$this->galleries[] = $galleries;
+	}
+	
+	public function setGallery(array $aUploadImage = NULL) {
+		
+		$galleries = array();
+		if (!empty($aUploadImage)) {
+			foreach ($aUploadImage as $size => $url) {
+				$fileName = pathinfo($url);
+				$gallery = new Gallery();
+				$gallery->setName($fileName['basename']);
+				$gallery->setUrl($url);
+				$gallery->setFileSize($size);
+				$gallery->setExtension($fileName['extension']);
+				$galleries[] = $gallery;
+			}
+		}
+		$this->galleries = $galleries;
 	}
 
 	/**

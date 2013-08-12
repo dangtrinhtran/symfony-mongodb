@@ -24,22 +24,18 @@
 				</div>
 				<form class="form-horizontal" action="{{ path('LikipeBackendBundle_Security_login_check') }}" method="post">
 					<fieldset>
-						<div class="input-group" title="Username" data-rel="tooltip">
-							<span class="input-group-addon">
-								<i class="icon-user"></i>
-							</span>
-							<input autofocus class="form-control span6" name="_username" id="username" type="text" placeholder="Username" value="{{ last_username }}" />
+						<div class="form-group">
+							 <label for="username" class="col-lg-4 control-label">Username</label>
+							 <div class="col-lg-5">
+								<input autofocus class="form-control" name="_username" id="username" type="text" placeholder="Username" value="{{ last_username }}" />
+							</div>
 						</div>
-						<div class="clearfix"></div>
-
-						<div class="input-group" title="Password" data-rel="tooltip">
-							<span class="input-group-addon">
-								<i class="icon-lock"></i>
-							</span>
-							<input class="form-control span6" name="_password" id="password" type="password" placeholder="Password" />
+						<div class="form-group">
+							<label for="password" class="col-lg-4 control-label">Password</label>
+							<div class="col-lg-5">
+								<input class="form-control" name="_password" id="password" type="password" placeholder="Password" />
+							</div>
 						</div>
-						<div class="clearfix"></div>
-
 						<div class="input-prepend">
 							<label class="remember" for="remember_me"><input type="checkbox" id="remember_me" name="_remember_me" />Remember me</label>
 						</div>

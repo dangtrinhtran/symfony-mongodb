@@ -73,6 +73,19 @@ a > [class^="icon-"] {
 	outline-style: none !important;
 }
 
+.images-response {
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+
+.images-response .image-item .alert {
+	margin-bottom: 0;
+}
+
+.input-upload {
+	padding-top: 10px;
+}
+
 .message-comment,
 .description-blog {
 	height: 250px;

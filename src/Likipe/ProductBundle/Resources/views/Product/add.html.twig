@@ -5,16 +5,18 @@
 
 	<div class="row-fluid blog">
 		<h1>Create new product!</h1>
-		<form class="form-product" action="" method="POST" enctype="multipart/form-data">
+		<form class="form-product form-horizontal" action="" method="POST" enctype="multipart/form-data">
 			<div class="content">
 			{{ form_errors(form) }}
-			<div class="form-content clearfix row-fluid">
-				<div class="form-info">
-				{{ form_widget(form) }}
+				<div class="form-content clearfix row-fluid">
+					<div class="form-info span4">
+					{{ form_widget(form) }}
+					</div>
+					{{ form_rest(form) }}
 				</div>
-				{{ form_rest(form) }}
+				<div class="input-upload">
+					<input id="fileupload" type="file" name="filesUpload">
 				</div>
-				<input id="fileupload" type="file" name="filesUpload">
 				<ul class="images-response row-fluid" style="list-style: none">
 					
 				</ul>

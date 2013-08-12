@@ -3,6 +3,7 @@
 namespace Likipe\ProductBundle\Services;
 
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 class UploadHandlerService {
 
@@ -18,9 +19,13 @@ class UploadHandlerService {
 			'delete_type' => 'DELETE',
 			'error_empty' => 'File upload empty!',
 			'error_array' => 'File upload in request body must be an array.',
+			'error_object' => 'Request a data is object.',
 			'file_error' => 'File upload error.',
 			'error_size' => "File upload can't be larger than 1 MB.",
-			'request_error' => 'Request error!'
+			'request_error' => 'Request error!',
+			'delete_error' => 'File not found!',
+			'success' => 'Deleted successfully.',
+			'file_exist' => 'File does not exist.'
 		);
 		$this->options = $options;
 	}
@@ -60,14 +65,13 @@ class UploadHandlerService {
 	 * @param string $folder Folder upload
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	
 	public function uploadAjax($folder = '') {
-		
+
 		if (!empty($folder)) {
 			$this->options['upload_url'] = $folder;
 			$this->options['upload_dir'] = $this->getUploadRoot() . $folder;
 		}
-		
+
 		if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST') {
 			$aFileUpload = isset($_FILES[$this->options['param_name']]) ?
 					$_FILES[$this->options['param_name']] : null;
@@ -116,7 +120,36 @@ class UploadHandlerService {
 					'error' => $this->options['request_error']
 						), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
 	}
-	
-	
+
+	public function removeAjax(Request $request) {
+
+		if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === $this->options['delete_type']) {
+			$data = json_decode($request->getContent());
+
+			if (empty($data)) {
+				return new Response(json_encode(array(
+							'error' => $this->options['delete_error']
+								), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
+			}
+			if (!is_object($data)) {
+				return new Response(json_encode(array(
+							'error' => $this->options['error_object']
+								), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
+			}
+			$file = $this->getUploadRoot() . $data->url;
+			if (file_exists($file)) {
+				unlink($file);
+				return new Response(json_encode(array(
+							'success' => $this->options['success']
+								), JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
+			}
+			return new Response(json_encode(array(
+						'error' => $this->options['file_exist']
+							), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
+		}
+		return new Response(json_encode(array(
+					'error' => $this->options['request_error']
+						), JSON_PRETTY_PRINT), 400, array('Content-Type' => 'application/json'));
+	}
 
 }

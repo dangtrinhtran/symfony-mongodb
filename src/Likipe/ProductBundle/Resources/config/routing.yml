@@ -1,12 +1,26 @@
 LikipeProductBundle_Product_add:
     pattern:  /add.{_format}
     defaults: { _controller: "LikipeProductBundle:Product:add", _format: html }
+    methods: [GET|POST]
     requirements: 
       _format:  html
+
+LikipeProductBundle_Product_edit:
+    pattern:  /edit/{iProductId}
+    defaults: { _controller: "LikipeProductBundle:Product:edit" }
+    methods: [GET|POST]
 
 LikipeProductBundle_Product_index:
     pattern:  /
     defaults: { _controller: "LikipeProductBundle:Product:index" }
+    methods: [GET]
+    
+LikipeProductBundle_Product_getGallaryAjax:
+    pattern:  /{iProductId}/get-gallary-ajax
+    defaults: { _controller: "LikipeProductBundle:Product:getGallaryAjax" }
+    methods: [GET]
+    options:
+        expose: true
     
 LikipeProductBundle_Product_uploadAjax:
     pattern:  /upload-ajax

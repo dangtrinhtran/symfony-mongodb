@@ -51,7 +51,8 @@ class ProductController extends Controller {
 		 */
 		$form->handleRequest($request);
 		if ($form->isValid()) {
-			
+			$aUploadImage = $request->get('urlImage');
+			$oProduct->setGallery($aUploadImage);
 			$dm = $this->get('doctrine_mongodb')->getManager();
 			/**
 			 * Persist: temporary variable to save, not save to database
@@ -68,13 +69,78 @@ class ProductController extends Controller {
 					'form' => $form->createView()
 		));
 	}
+	
+	/**
+	 * editAction
+	 * Edit product
+	 * @author Rony <rony@likipe.se>
+	 * @param type \Symfony\Component\HttpFoundation\Request $request, $iProductId
+	 */
+	public function editAction(Request $request, $iProductId) {
+
+		$dm = $this->get('doctrine_mongodb')->getManager();
+		$oProduct = $dm->getRepository('LikipeProductBundle:Product')->find($iProductId);
+
+		if (!$oProduct) {
+			throw $this->createNotFoundException(
+					'No product found for id ' . $iProductId
+			);
+		}
+		$form = $this->createForm(
+				new ProductType(), $oProduct
+		);
+		/**
+		 * Form for symfony3
+		 */
+		$form->handleRequest($request);
+		if ($form->isValid()) {
+			$aUploadImage = $request->get('urlImage');
+			$oProduct->setGallery($aUploadImage);
+			
+			$dm = $this->get('doctrine_mongodb')->getManager();
+			$dm->flush();
+
+			$this->get('session')->getFlashBag()->add('product_success', $this->get('translator')->trans('Edit successfully product: ' . $oProduct->getName()));
+
+			return $this->redirect($this->generateUrl('LikipeProductBundle_Product_index'));
+		}
+		
+		return $this->render('LikipeProductBundle:Product:edit.html.twig', array(
+					'form' => $form->createView(),
+					'iProductId' => $iProductId
+		));
+	}
+	
+	public function getGallaryAjaxAction($iProductId) {
+		
+		$dm = $this->get('doctrine_mongodb')->getManager();
+		$oProduct = $dm->getRepository('LikipeProductBundle:Product')->find($iProductId);
+
+		if (!$oProduct) {
+			return new Response(json_encode(array(
+					'error' => sprintf('No product found for id %d.', $iProductId)
+						), JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
+		}
+		$aGalleries = $oProduct->getGalleries();
+		$response = array();
+		if (!empty($aGalleries)) {
+			foreach ($aGalleries as $oGallery) {
+				$response[] = array(
+					'filename' => $oGallery->getName(),
+					'url' => $oGallery->getUrl(),
+					'filesize' => $oGallery->getFileSize(),
+					'extension' => $oGallery->getExtension()
+				);
+			}
+		}
+		return new Response(json_encode($response, JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
+	}
 
 	public function uploadAjaxAction() {
 		return $this->get("likipe.uploadfile.service")->uploadAjax();
 	}
 	
 	public function deleteAjaxAction(Request $request) {
-		$data = json_decode($request->getContent());
-		return new Response(json_encode($data, JSON_PRETTY_PRINT), 200, array('Content-Type' => 'application/json'));
+		return $this->get("likipe.uploadfile.service")->removeAjax($request);
 	}
 }
